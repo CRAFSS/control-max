@@ -12,11 +12,11 @@
   </div>
 
   <form>
-      <ion-input placeholder="E-mail"></ion-input>
-      <ion-input placeholder="Senha"></ion-input>
-      <ion-input placeholder="Nome"></ion-input>
+      <ion-input placeholder="E-mail" name="email" [(ngModel)]="userregis.email" ></ion-input>
+      <ion-input placeholder="Senha" name="senha" [(ngModel)]="userregis.senha"></ion-input>
+      <ion-input placeholder="Nome" name="nome" [(ngModel)]="userregis.nome"></ion-input>
       <div class="ion-text-center">
-        <ion-button fill="clear">Cadastrar</ion-button>
+        <ion-button fill="clear" (click)="registor()" >Cadastrar</ion-button>
       </div>
   </form>
 

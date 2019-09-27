@@ -14,6 +14,11 @@ import { AjustesPage } from './ajustes/ajustes.page';
 import { ModalPage } from './modal/modal.page';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HistoricoPage } from './historico/historico.page';
+import { AngularFireModule } from '@angular/fire';
+import { environment } from '../environments/environment.prod';
+import { AngularFireAuthModule } from '@angular/fire/auth';
+
+
 
 @NgModule({
   declarations: [
@@ -31,7 +36,9 @@ import { HistoricoPage } from './historico/historico.page';
     AppRoutingModule,
     ModalPageModule,
     NovogastoPageModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(environment.firabase),
+    AngularFireAuthModule
   ],
   providers: [
     HistoricoPage,
