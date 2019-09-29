@@ -12,9 +12,9 @@ export class CadastroPage implements OnInit {
 
 
   userregis: User = {};
-  private loading:any;
+  private loading;
 
-  constructor(private authserv:AuthService ,private loadingController:LoadingController, private toastctrl:ToastController) { }
+  constructor(private toastController:ToastController,private authserv:AuthService ,private loadingController:LoadingController, private toastctrl:ToastController) { }
 
   ngOnInit() {
   }
@@ -26,16 +26,36 @@ export class CadastroPage implements OnInit {
     try{
       await this.authserv.register(this.userregis)
     } catch(error){
-      console.log(error);
+      //console.log(error);
+      let mens:string;
+        switch(error.code){
+          case 'auth/email-already-in-use':
+            mens = "E-mail já existe.";
+            break;
+
+          case 'auth/invalid-email':
+            mens = "E-mail invalido.";
+            break;                                        
+        }
+        this.presentToast(mens);
+
     } finally{
       this.loading.dismiss();
     }
 
   }
 
+  async presentToast(mensagem:string) {
+    const toast = await this.toastController.create({
+      message: mensagem,
+      duration: 2000
+    });
+    toast.present();
+  }
+
   async presentLoading() {
-    const loading = await this.loadingController.create({message: 'Carregando'});
-    return loading.present();
+    this.loading = await this.loadingController.create({message: 'Carregando'});
+    return this.loading.present();
   }
 
 }
