@@ -26,7 +26,7 @@ export class CadastroPage implements OnInit {
     try{
       await this.authserv.register(this.userregis)
     } catch(error){
-      //console.log(error);
+      console.log(error);
       let mens:string;
         switch(error.code){
           case 'auth/email-already-in-use':
@@ -35,7 +35,11 @@ export class CadastroPage implements OnInit {
 
           case 'auth/invalid-email':
             mens = "E-mail invalido.";
-            break;                                        
+            break;
+
+          case 'auth/argument-error':
+            mens = "O cadastro teve conter um E-mail e um senha";
+            break;                                    
         }
         this.presentToast(mens);
 
