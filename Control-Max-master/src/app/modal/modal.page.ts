@@ -20,7 +20,11 @@ export class ModalPage implements OnInit{
 
   @ViewChild('mylist', {static: false})mylist: IonList;
   
-  constructor(private modalController: ModalController,private router:Router , private storageService: StorageService, private toastController: ToastController, private storage:Storage) {
+  constructor(private modalController: ModalController,
+    private router:Router, 
+    private storageService: StorageService, 
+    private toastController: ToastController, 
+    private storage: Storage) {
   }
   
   //ionViewWillEnter()
@@ -66,10 +70,7 @@ export class ModalPage implements OnInit{
           }
         });
         this.storage.set("total", this.total)
-      } 
-    }
-    
-    );
+      }});
   }
 
   deletarRegistro(registro:registro){

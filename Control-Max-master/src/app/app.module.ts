@@ -37,7 +37,6 @@ import { HomePage } from './home/home.page';
   providers: [
     HistoricoPage,
     ModalPage,
-    HomePage,
     AjustesPage,
     IntroPage,
     StatusBar,

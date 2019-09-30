@@ -23,8 +23,7 @@ export class NovogastoPage implements OnInit {
     private storageService: StorageService, 
     private toastController: ToastController,
     private storage:Storage,
-    private formBuilder: FormBuilder,
-    private qualquermerda: HomePage) { }
+    private formBuilder: FormBuilder) { }
 
   ngOnInit() {
     //habilitar o hammerjs em todas as direções
@@ -74,7 +73,6 @@ export class NovogastoPage implements OnInit {
       this.novoRegistro = <registro>{};
     })
     console.log(this.novoRegistro)
-    this.qualquermerda.total()
   }
 
   async showToast(msg) {

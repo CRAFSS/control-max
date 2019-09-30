@@ -38,12 +38,12 @@ export class HomePage {
     var hammertime = new Hammer(document.body);
     hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     
-    this.pegarSalario();
-    this.total();
-    this.modal.listarRegistros();
-    this.hist.listarHistorico();
-    /*setInterval(() => {
-    }, 1000);*/
+    setInterval(() => {
+      this.pegarSalario();
+      this.total();
+      this.modal.listarRegistros();
+      this.hist.listarHistorico();
+    }, 1000);
     this.balancos();
     console.log(this.a)
   }
