@@ -37,7 +37,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     ModalPageModule,
     NovogastoPageModule,
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(environment.firabase),
+    AngularFireModule.initializeApp(environment.firebaseConfig),
     AngularFireAuthModule
   ],
   providers: [
