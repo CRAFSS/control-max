@@ -12,6 +12,7 @@ const routes: Routes = [
   { path: 'ajustes', loadChildren: './ajustes/ajustes.module#AjustesPageModule' },
   { path: 'historico', loadChildren: './historico/historico.module#HistoricoPageModule' },
   { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' },
+  { path: 'login', loadChildren: './login/login.module#LoginPageModule' },
 ];
 
 @NgModule({

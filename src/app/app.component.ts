@@ -42,7 +42,7 @@ export class AppComponent implements OnInit{
   ngOnInit(){
     setInterval(() => {
       this.Clock = Date.now();
-      this.trocademestest();
+      //this.trocademestest();
     }, 1000);
   }
   
@@ -66,12 +66,12 @@ export class AppComponent implements OnInit{
     await alert.present();
   }
 
-  trocademestest(){
+  /*trocademestest(){
     this.inputValue = (<HTMLInputElement>document.getElementById("mes")).value;
     //console.log(this.inputValue);
     if(this.inputValue == "01"){
       this.presentAlert();
       this.storage.set("meus-registros", []);
     }
-  }
+  }*/
 }
