@@ -27,7 +27,25 @@ export class LoginPage implements OnInit {
       await this.authserv.login(this.userlog)
     } catch(error){
       console.log(error);
-       this.presentToast(error.message)
+      let mens:string;
+        switch(error.code){
+          case 'auth/argument-error':
+            mens = "Senha invalida";
+            break;
+
+          case 'auth/invalid-email':
+            mens = "E-mail invalido.";
+            break;
+
+          case 'auth/wrong-password':
+            mens = "senha incorreta";
+            break;
+
+          case 'auth/user-not-found':
+            mens = "Usuária não encontrado";
+            break;                                    
+        }
+        this.presentToast(mens);
     } finally{
       this.loading.dismiss();
     }

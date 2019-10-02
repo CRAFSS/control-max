@@ -39,6 +39,10 @@ export class CadastroPage implements OnInit {
 
           case 'auth/argument-error':
             mens = "O cadastro teve conter um E-mail e um senha";
+            break;
+
+          case 'auth/weak-password':
+            mens = "A senha deve conter ao menos 6 digitos";
             break;                                    
         }
         this.presentToast(mens);
