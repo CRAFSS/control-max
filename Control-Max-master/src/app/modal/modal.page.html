@@ -28,7 +28,6 @@
           <h3>{{ registro.lugar }}</h3>
           <ion-text color="secondary">
             <p *ngIf="registro.tipo != d" class="money blue">{{ registro.valor | currency:'R$ '}}</p>
-            <p *ngIf="registro.tipo == d" class="money red">{{ registro.valor | currency:'R$ '}}</p>
           </ion-text>
           <p>{{ registro.modificado | date:'short'}}</p>
         </ion-label>
