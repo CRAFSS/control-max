@@ -2,6 +2,7 @@ import { Component, OnInit } from '@angular/core';
 import { AuthService } from '../services/auth.service';
 import { LoadingController, ToastController } from '@ionic/angular';
 import { User } from 'src/app/interfaces/user';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-login',
@@ -14,7 +15,7 @@ export class LoginPage implements OnInit {
  private loading;
  userlog: User = {};
 
-  constructor(private authserv:AuthService, private loadingController:LoadingController, private toastController:ToastController) { }
+  constructor(private router:Router, private authserv:AuthService, private loadingController:LoadingController, private toastController:ToastController) { }
 
   ngOnInit() {
   }
@@ -38,6 +39,10 @@ export class LoginPage implements OnInit {
       duration: 2000
     });
     toast.present();
+  }
+
+  cad(){
+    this.router.navigate(['cadastro'])
   }
 
   async presentLoading() {

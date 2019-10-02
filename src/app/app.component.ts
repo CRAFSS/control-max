@@ -66,12 +66,19 @@ export class AppComponent implements OnInit{
     await alert.present();
   }
 
-  /*trocademestest(){
+  trocademestest(){
     this.inputValue = (<HTMLInputElement>document.getElementById("mes")).value;
     //console.log(this.inputValue);
     if(this.inputValue == "01"){
-      this.presentAlert();
-      this.storage.set("meus-registros", []);
+      this.storage.get('mes').then((mes) => {
+        if(mes){
+          this.presentAlert();
+          this.storage.set("meus-registros", []);
+          this.storage.set("mes", false);
+        }
+      });
+    }else if(this.inputValue == "02"){
+      this.storage.set("mes", true);
     }
-  }*/
+  }
 }

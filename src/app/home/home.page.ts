@@ -7,6 +7,7 @@ import { NovogastoPage } from '../novogasto/novogasto.page';
 import { registro } from '../services/storage.service';
 import { Storage } from '@ionic/storage';
 import { HistoricoPage } from '../historico/historico.page';
+import { AuthService } from '../services/auth.service';
 
 @Component({
   selector: 'app-home',
@@ -24,13 +25,17 @@ export class HomePage implements OnInit{
   a:number; 
   b:number;
   
-  constructor(public modalController: ModalController, private storage:Storage, private modal:ModalPage, private hist:HistoricoPage) { }
+  constructor(private test:AuthService,public modalController: ModalController, private storage:Storage, private modal:ModalPage, private hist:HistoricoPage) { }
 
   formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
     minimumFractionDigits: 2,
   });
+
+  logout(){
+    this.test.logout();
+  }
 
   ngOnInit() {
     //habilitar swipe em todas a direções
