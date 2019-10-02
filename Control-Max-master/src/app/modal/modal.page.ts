@@ -15,8 +15,8 @@ export class ModalPage implements OnInit{
   registros: registro[] = [];
   parar:any;
   total:number;
-  debito:boolean;
-  cretdito:boolean;
+  debito:boolean = false
+  cretdito:boolean = false
 
   @ViewChild('mylist', {static: false})mylist: IonList;
   
@@ -58,8 +58,13 @@ export class ModalPage implements OnInit{
       this.total = 0;
       for(let i = 0; i < this.registros.length; i++){
         console.log(this.registros[i].tipo)
-        console.log("Essa é a verificação das despesas "+this.registros[i].tipo === "d")
-        console.log("Essa é a verificação das receitas "+this.registros[i].tipo === "g")
+        if((this.registros[i].tipo).toString()=="d"){
+          this.registros[i].debito = true;
+          this.registros[i].credito = false;
+        }else{
+          this.registros[i].debito = false;
+          this.registros[i].credito = true;
+        }
       }
       if(this.registros){
         this.registros.forEach(element => {

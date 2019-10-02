@@ -8,6 +8,8 @@ export interface registro{
   valor: number,
   modificado:number;
   tipo: string;
+  credito: boolean;
+  debito: boolean
 }
 
 const REGISTRO_KEY = 'meus-registros';
