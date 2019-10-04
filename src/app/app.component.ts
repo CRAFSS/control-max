@@ -44,6 +44,8 @@ export class AppComponent implements OnInit{
       this.Clock = Date.now();
       //this.trocademestest();
     }, 1000);
+
+    this.storage.set('mes', true)
   }
   
   initializeApp() {
