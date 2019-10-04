@@ -7,6 +7,7 @@ import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HomePageModule } from '../home/home.module';
 import { HomePage } from '../home/home.page';
+import { ExtratoService } from '../services/extrato.service';
 
 
 @Component({
@@ -23,7 +24,8 @@ export class NovogastoPage implements OnInit {
     private storageService: StorageService, 
     private toastController: ToastController,
     private storage:Storage,
-    private formBuilder: FormBuilder) { }
+    private formBuilder: FormBuilder,
+    private extratoService: ExtratoService) { }
 
   ngOnInit() {
     //habilitar o hammerjs em todas as direções
@@ -64,7 +66,13 @@ export class NovogastoPage implements OnInit {
   addRegistro(){
     this.novoRegistro.id = Date.now();
     this.novoRegistro.modificado = Date.now();
-    
+    try {
+      this.extratoService.addMovimentacao(this.novoRegistro)
+    } catch (error) {
+      console.error(error)
+    }finally{
+      console.log("Eu gosto de mim!!!!")
+    }
     this.storageService.addRegistro(this.novoRegistro).then(registro => {
       this.novoRegistro = <registro>{};
       this.showToast('Compra Adicionada!')

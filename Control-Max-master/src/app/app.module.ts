@@ -15,6 +15,11 @@ import { ModalPage } from './modal/modal.page';
 import { ReactiveFormsModule } from '@angular/forms';
 import { HistoricoPage } from './historico/historico.page';
 import { HomePage } from './home/home.page';
+import { AngularFireModule } from "@angular/fire";
+import { environment } from '../environments/environment';
+import { AngularFireAuth } from "@angular/fire/auth";
+import { AngularFirestoreModule } from "@angular/fire/firestore";
+
 
 @NgModule({
   declarations: [
@@ -26,13 +31,14 @@ import { HomePage } from './home/home.page';
   imports: [
     BrowserModule, 
     IonicModule.forRoot({
-      backButtonText: 'Voltar',
-      //mode: 'md',
+      backButtonText: 'Voltar'
     }), 
     AppRoutingModule,
     ModalPageModule,
     NovogastoPageModule,
-    IonicStorageModule.forRoot()
+    IonicStorageModule.forRoot(),
+    AngularFireModule.initializeApp(environment.fireBase),
+    AngularFirestoreModule
   ],
   providers: [
     HistoricoPage,
