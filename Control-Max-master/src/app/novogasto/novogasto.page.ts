@@ -19,6 +19,8 @@ export class NovogastoPage implements OnInit {
 
   novoRegistro: registro = <registro>{};
   ngasto: FormGroup;
+  debito:boolean = false
+  cretdito:boolean = false
 
   constructor(public modalController: ModalController,
     private storageService: StorageService, 
@@ -66,6 +68,9 @@ export class NovogastoPage implements OnInit {
   addRegistro(){
     this.novoRegistro.id = Date.now();
     this.novoRegistro.modificado = Date.now();
+    this.novoRegistro.debito = false;
+    this.novoRegistro.credito = false;
+    // Código para adicionar novos gastos no Firebase
     try {
       this.extratoService.addMovimentacao(this.novoRegistro)
     } catch (error) {
