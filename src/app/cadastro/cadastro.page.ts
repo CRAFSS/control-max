@@ -43,7 +43,11 @@ export class CadastroPage implements OnInit {
 
           case 'auth/weak-password':
             mens = "A senha deve conter ao menos 6 digitos";
-            break;                                    
+            break; 
+
+          case 'auth/network-request-failed':
+            mens = "Falha na conexão. Certifique-se que esteja conectado a internet.";
+            break;                                     
         }
         this.presentToast(mens);
 
@@ -56,7 +60,7 @@ export class CadastroPage implements OnInit {
   async presentToast(mensagem:string) {
     const toast = await this.toastController.create({
       message: mensagem,
-      duration: 2000
+      duration: 3000
     });
     toast.present();
   }

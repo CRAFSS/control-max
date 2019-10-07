@@ -39,3 +39,12 @@ ion-input{
 ion-button{
     margin-top: 20%;
 }
+
+ion-header ion-toolbar {
+    --background: #993399;
+    --color: white;
+  }
+
+ion-header{
+    overflow: hidden;
+}

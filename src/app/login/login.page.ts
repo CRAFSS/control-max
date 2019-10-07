@@ -44,6 +44,10 @@ export class LoginPage implements OnInit {
           case 'auth/user-not-found':
             mens = "Usuária não encontrado";
             break;                                    
+
+          case 'auth/network-request-failed':
+            mens = "Falha na conexão. Certifique-se que esteja conectado a internet.";
+            break;                                    
         }
         this.presentToast(mens);
     } finally{
@@ -54,7 +58,7 @@ export class LoginPage implements OnInit {
   async presentToast(mensagem:string) {
     const toast = await this.toastController.create({
       message: mensagem,
-      duration: 2000
+      duration: 3000
     });
     toast.present();
   }

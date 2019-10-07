@@ -25,17 +25,13 @@ export class HomePage implements OnInit{
   a:number; 
   b:number;
   
-  constructor(private test:AuthService,public modalController: ModalController, private storage:Storage, private modal:ModalPage, private hist:HistoricoPage) { }
+  constructor(public modalController: ModalController, private storage:Storage, private modal:ModalPage, private hist:HistoricoPage) { }
 
   formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
     minimumFractionDigits: 2,
   });
-
-  logout(){
-    this.test.logout();
-  }
 
   ngOnInit() {
     //habilitar swipe em todas a direções

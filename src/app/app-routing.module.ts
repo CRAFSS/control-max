@@ -15,6 +15,7 @@ const routes: Routes = [
   { path: 'historico', loadChildren: './historico/historico.module#HistoricoPageModule', canActivate: [AuthGuard]},
   { path: 'cadastro', loadChildren: './cadastro/cadastro.module#CadastroPageModule' },
   { path: 'login', loadChildren: './login/login.module#LoginPageModule', canActivate: [LoginGuard] },
+  { path: 'conta', loadChildren: './conta/conta.module#ContaPageModule', canActivate: [AuthGuard] },
 ];
 
 @NgModule({
