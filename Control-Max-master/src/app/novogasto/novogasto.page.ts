@@ -70,6 +70,7 @@ export class NovogastoPage implements OnInit {
     this.novoRegistro.modificado = Date.now();
     this.novoRegistro.debito = false;
     this.novoRegistro.credito = false;
+    
     // Código para adicionar novos gastos no Firebase
     try {
       this.extratoService.addMovimentacao(this.novoRegistro)

@@ -4,6 +4,9 @@ import { StorageService, registro } from '../services/storage.service';
 import { Platform, ToastController, IonList } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { Subscription } from 'rxjs';
+import { Extrato } from '../models/extrato';
+import { ExtratoService } from '../services/extrato.service';
 
 @Component({
   selector: 'app-modal',
@@ -13,10 +16,14 @@ import { Router } from '@angular/router';
 export class ModalPage implements OnInit{
 
   registros: registro[] = [];
+  registrosTest: registro[] = [];
+  teste: Extrato = {}
   parar:any;
   total:number;
   debito:boolean = false
   cretdito:boolean = false
+  extratoSubscripiton: Subscription;
+  private teste1 = new Array<Extrato>();
 
   @ViewChild('mylist', {static: false})mylist: IonList;
   
@@ -24,7 +31,19 @@ export class ModalPage implements OnInit{
     private router:Router, 
     private storageService: StorageService, 
     private toastController: ToastController, 
-    private storage: Storage) {
+    private storage: Storage,
+    private extratoService: ExtratoService) {
+      /*this.extratoSubscripiton = this.extratoService.getYourMove().subscribe(data => {
+        //this.teste1 = data;
+        //this.registrosTest.push(this.teste)
+        /*if(this.teste.tipo == "g"){
+          this.teste.credito = true;
+          this.teste.debito = false;
+        }else{
+          this.teste.credito = false;
+          this.teste.debito = true;
+        }*
+      })*/
   }
   
   //ionViewWillEnter()
@@ -33,6 +52,7 @@ export class ModalPage implements OnInit{
     this.parar = setInterval(() => {
       this.msg();
     }, 1);
+    
   }
 
   msg(){
@@ -53,6 +73,7 @@ export class ModalPage implements OnInit{
   }
 
   listarRegistros(){
+
     this.storageService.listaRegistros().then(registro =>{
       this.registros = registro;
       this.total = 0;
