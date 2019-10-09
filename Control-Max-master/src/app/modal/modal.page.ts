@@ -22,8 +22,8 @@ export class ModalPage implements OnInit{
   total:number;
   debito:boolean = false
   cretdito:boolean = false
-  extratoSubscripiton: Subscription;
-  private teste1 = new Array<Extrato>();
+  public teste1 = new Array<Extrato>();
+  private extratoSubscripiton: Subscription;
 
   @ViewChild('mylist', {static: false})mylist: IonList;
   
@@ -33,6 +33,10 @@ export class ModalPage implements OnInit{
     private toastController: ToastController, 
     private storage: Storage,
     private extratoService: ExtratoService) {
+
+      this.extratoSubscripiton = this.extratoService.getAll().subscribe(data =>{
+        this.teste1 = data;
+      })
       /*this.extratoSubscripiton = this.extratoService.getYourMove().subscribe(data => {
         //this.teste1 = data;
         //this.registrosTest.push(this.teste)
