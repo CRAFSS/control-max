@@ -38,14 +38,14 @@ export class HomePage {
     var hammertime = new Hammer(document.body);
     hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     
-    setInterval(() => {
+    /*setInterval(() => {
       this.pegarSalario();
       this.total();
       this.modal.listarRegistros();
       this.hist.listarHistorico();
     }, 1000);
     this.balancos();
-    console.log(this.a)
+    console.log(this.a)*/
   }
 
   async balancos(){

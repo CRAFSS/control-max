@@ -10,9 +10,11 @@ import { Observable, Subscribable } from 'rxjs';
 
 export class ExtratoService {
   
-  private extColections = this.db.collection<Extrato>("Extrato")
+  private extColections: AngularFirestoreCollection<Extrato>
   
   constructor(private db: AngularFirestore){
+    this.extColections = this.db.collection<Extrato>("Extrato")
+    
   }
 
   getAll(){
@@ -27,4 +29,7 @@ export class ExtratoService {
     )
   }
   
+  addMovimentacao(extrato: Extrato){
+    return this.extColections.add(extrato);
+  }
 }

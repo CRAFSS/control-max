@@ -19,11 +19,12 @@ export class ModalPage implements OnInit{
   registrosTest: registro[] = [];
   teste: Extrato = {}
   parar:any;
-  total:number;
+  total:number = 0;
   debito:boolean = false
   cretdito:boolean = false
   public teste1 = new Array<Extrato>();
   private extratoSubscripiton: Subscription;
+  
 
   @ViewChild('mylist', {static: false})mylist: IonList;
   
@@ -37,25 +38,14 @@ export class ModalPage implements OnInit{
       this.extratoSubscripiton = this.extratoService.getAll().subscribe(data =>{
         this.teste1 = data;
       })
-      /*this.extratoSubscripiton = this.extratoService.getYourMove().subscribe(data => {
-        //this.teste1 = data;
-        //this.registrosTest.push(this.teste)
-        /*if(this.teste.tipo == "g"){
-          this.teste.credito = true;
-          this.teste.debito = false;
-        }else{
-          this.teste.credito = false;
-          this.teste.debito = true;
-        }*
-      })*/
   }
   
   //ionViewWillEnter()
   ngOnInit(){
     this.listarRegistros();
-    this.parar = setInterval(() => {
+    /*this.parar = setInterval(() => {
       this.msg();
-    }, 1);
+    }, 1);*/
     
   }
 
@@ -77,8 +67,26 @@ export class ModalPage implements OnInit{
   }
 
   listarRegistros(){
-
-    this.storageService.listaRegistros().then(registro =>{
+    console.log("Estou dentro do listar Registros.")
+    console.log(this.teste1.length)
+    if(this.teste1.length !== 0){
+      console.log("Existe registro aqui")
+      document.getElementById("test").style.display = "none";
+    }else{
+      console.log("Eh bixo, não tem nada... E agora??")
+      document.getElementById("test").style.display = "block";
+    }
+    this.teste1.forEach(element => {
+      console.log("vamos iniciar essa bagaça!!")
+      if(element.tipo == "g"){
+        console.log("Cheguei aqui no G")
+        this.total += element.valor;
+      }else{
+        console.log("Cheguei aqui no D")
+        this.total -= element.valor;
+      }
+    });
+    /*this.storageService.listaRegistros().then(registro =>{
       this.registros = registro;
       this.total = 0;
       for(let i = 0; i < this.registros.length; i++){
@@ -100,7 +108,7 @@ export class ModalPage implements OnInit{
           }
         });
         this.storage.set("total", this.total)
-      }});
+      }});*/
   }
 
   deletarRegistro(registro:registro){
