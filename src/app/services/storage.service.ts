@@ -3,13 +3,13 @@ import { Storage } from '@ionic/storage';
 
 //Model
 export interface registro{
-  id:number,
-  lugar: string,
-  valor: number,
-  modificado:number;
-  tipo: string;
-  credito: boolean;
-  debito: boolean
+  id?:number,
+  lugar?: string,
+  valor?: number,
+  modificado?:number;
+  tipo?: string;
+  credito?: boolean;
+  debito?: boolean
 }
 
 const REGISTRO_KEY = 'meus-registros';

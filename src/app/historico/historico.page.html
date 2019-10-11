@@ -20,14 +20,14 @@
 
         <p  id="test">Nenhuma compra foi adicionada ainda</p>
     
-        <ion-item-sliding *ngFor="let h of historico">     
+        <ion-item-sliding *ngFor="let e of hst">     
           <ion-item>
             <ion-label text-wrap>
-              <h3>{{ h.lugar }}</h3>
+              <h3>{{ e.lugar }}</h3>
               <ion-text color="secondary">
-                <p class="money">{{ h.valor | currency:'R$ '}}</p>
+                <p class="money">{{ e.valor | currency:'R$ '}}</p>
               </ion-text>
-              <p>{{ h.modificado | date:'short'}}</p>
+              <p>{{ e.modificado | date:'short'}}</p>
             </ion-label>
             <!--<ion-icon name="trash" (click)="deletarRegistro(registro)"></ion-icon>-->
           </ion-item>

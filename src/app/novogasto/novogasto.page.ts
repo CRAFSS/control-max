@@ -8,6 +8,7 @@ import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { HomePageModule } from '../home/home.module';
 import { HomePage } from '../home/home.page';
 import { ExtratoService } from '../services/extrato.service';
+import { Extrato } from '../models/extrato';
 
 
 @Component({
@@ -18,6 +19,7 @@ import { ExtratoService } from '../services/extrato.service';
 export class NovogastoPage implements OnInit {
 
   novoRegistro: registro = <registro>{};
+  novoRegistro1: Extrato = <Extrato>{};
   ngasto: FormGroup;
   debito:boolean = false
   cretdito:boolean = false
@@ -66,26 +68,36 @@ export class NovogastoPage implements OnInit {
   }
 
   addRegistro(){
-    this.novoRegistro.id = Date.now();
-    this.novoRegistro.modificado = Date.now();
-    this.novoRegistro.debito = false;
-    this.novoRegistro.credito = false;
+    this.novoRegistro1.id = Date.now().toString();
+    this.novoRegistro1.modificado = Date.now();
+
     // Código para adicionar novos gastos no Firebase
     try {
-      this.extratoService.addMovimentacao(this.novoRegistro)
+      if(this.novoRegistro1.tipo == "g"){
+        console.log("Credito")
+        this.novoRegistro1.credito = true;
+        this.novoRegistro1.debito = false;
+      }else if(this.novoRegistro1.tipo == "d"){
+        console.log("debito")
+        this.novoRegistro1.credito = false;
+        this.novoRegistro1.debito = true;
+      }
+      console.log(this.novoRegistro1)
+      this.extratoService.addMovimentacao(this.novoRegistro1)
+      this.showToast('Compra Adicionada!')
     } catch (error) {
       console.error(error)
     }finally{
       console.log("Eu gosto de mim!!!!")
     }
-    this.storageService.addRegistro(this.novoRegistro).then(registro => {
+    /*this.storageService.addRegistro(this.novoRegistro).then(registro => {
       this.novoRegistro = <registro>{};
       this.showToast('Compra Adicionada!')
     })
     this.storageService.addhistoric(this.novoRegistro).then(registro => {
       this.novoRegistro = <registro>{};
-    })
-    console.log(this.novoRegistro)
+    })*/
+    //console.log(this.novoRegistro)
   }
 
   async showToast(msg) {

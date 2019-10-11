@@ -3,6 +3,9 @@ import { StorageService, registro } from '../services/storage.service';
 import { IonList, ToastController, AlertController, Platform, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { Extrato } from '../models/extrato';
+import { HistoricoService } from '../services/historico.service';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-historico',
@@ -14,16 +17,29 @@ export class HistoricoPage {
   historico: registro[] = [];
   loop:any;
 
+  public hst = new Array <Extrato>();
+  private historicoSubscription: Subscription;
+
   @ViewChild('mylist', {static: false})mylist: IonList;
 
-  constructor(private nav:NavController,private storageService:StorageService, private toastController:ToastController, private storage:Storage, private alertController:AlertController) { }
+  constructor(private nav:NavController,
+    private storageService:StorageService, 
+    private toastController:ToastController, 
+    private storage:Storage, 
+    private alertController:AlertController,
+    private historicoService:HistoricoService) { 
 
-  ionViewWillEnter(){
+      this.historicoSubscription = this.historicoService.getAll().subscribe(data =>{this.hst = data})
+    }
+
+  //ionViewWillEnter(){
+  ngOnInit(){
     this.listarHistorico();
-    this.loop = setInterval(() => {
+  }  
+    /*this.loop = setInterval(() => {
       this.msg();
     }, 1);
-  }
+  }*/
 
   msg(){
     this.storage.get('historico').then(test => {
@@ -38,10 +54,17 @@ export class HistoricoPage {
   }
 
   listarHistorico(){
-    this.storageService.listaHistorico().then(lhistorico =>{
-      this.historico = lhistorico;
-    });
-  }
+    console.log("Estou dentro do historico.")
+    console.log(this.hst.length)
+    if(this.hst.length !== 0){
+      console.log("Existe historicos aqui")
+      document.getElementById("test").style.display = "none";
+    }else{
+      console.log("Eh bixo, não tem nada... E agora??")
+      document.getElementById("test").style.display = "block";
+    }
+    this.hst
+    };
 
   /*deletarHistorico(historico:registro){
     this.storageService.deletarHistorico(historico.id).then(hist=>{
@@ -62,6 +85,7 @@ export class HistoricoPage {
   histfechar(){
     clearInterval(this.loop);
     this.nav.pop()
+    
   }
 
   async apagar() {

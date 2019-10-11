@@ -8,17 +8,17 @@ import { Observable, Subscribable } from 'rxjs';
   providedIn: 'root'
 })
 
-export class ExtratoService {
+export class HistoricoService {
   
-  private extColections: AngularFirestoreCollection<Extrato>
+  private hstCollections: AngularFirestoreCollection<Extrato>
   
   constructor(private db: AngularFirestore){
-    this.extColections = this.db.collection<Extrato>("Extrato")
+    this.hstCollections = this.db.collection<Extrato>("Historico")
     
   }
 
   getAll(){
-    return this.extColections.snapshotChanges().pipe(
+    return this.hstCollections.snapshotChanges().pipe(
       map(action => {
         return action.map(a =>{
           const data = a.payload.doc.data()
@@ -27,9 +27,5 @@ export class ExtratoService {
         })
       })
     )
-  }
-  
-  addMovimentacao(extrato: Extrato){
-    return this.extColections.add(extrato);
   }
 }
