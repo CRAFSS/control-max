@@ -35,21 +35,38 @@ export class ModalPage implements OnInit{
     private storage: Storage,
     private extratoService: ExtratoService) {
 
-      this.extratoSubscripiton = this.extratoService.getAll().subscribe(data =>{
-        this.teste1 = data;
-      })
-  }
-  
-  //ionViewWillEnter()
-  ngOnInit(){
-    this.listarRegistros();
-    /*this.parar = setInterval(() => {
-      this.msg();
-    }, 1);*/
+    }
     
-  }
-
-  msg(){
+    //ionViewWillEnter()
+    ngOnInit(){
+      this.listarRegistros(); 
+      /*this.parar = setInterval(() => {
+        /*this.msg();
+        this.extratoSubscripiton = this.extratoService.getAll().subscribe(data =>{
+          this.teste1 = data;
+        })
+      }, 1);*/
+    
+    }
+     pegaTudo(){
+      this.extratoSubscripiton =  this.extratoService.getAll().subscribe(data =>{
+        this.teste1 = data;
+        for(let i = 0; i < this.teste1.length; i++){
+          console.log("vamos iniciar essa bagaça!!")
+          if(this.teste1[i].tipo == "g"){
+            console.log("Cheguei aqui no G")
+            this.total += this.teste1[i].valor;
+          }else{
+            console.log("Cheguei aqui no D")
+            this.total -= this.teste1[i].valor;
+          }
+        }
+        this.teste1.forEach(element => {
+          
+      })
+    })
+    }
+  /*msg(){
     this.storage.get('meus-registros').then(test => {
       if(test){
         if(this.registros.length !== 0){
@@ -59,24 +76,18 @@ export class ModalPage implements OnInit{
         }
       }
     })
-  }
+  }*/
 
   fechar() {
     clearInterval(this.parar)
     this.modalController.dismiss();
   }
 
-  listarRegistros(){
+  async listarRegistros(){
+    this.pegaTudo()
     console.log("Estou dentro do listar Registros.")
     console.log(this.teste1.length)
-    if(this.teste1.length !== 0){
-      console.log("Existe registro aqui")
-      document.getElementById("test").style.display = "none";
-    }else{
-      console.log("Eh bixo, não tem nada... E agora??")
-      document.getElementById("test").style.display = "block";
-    }
-    this.teste1.forEach(element => {
+    /*this.teste1.forEach(element => {
       console.log("vamos iniciar essa bagaça!!")
       if(element.tipo == "g"){
         console.log("Cheguei aqui no G")

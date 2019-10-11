@@ -82,8 +82,9 @@ export class NovogastoPage implements OnInit {
         this.novoRegistro1.credito = false;
         this.novoRegistro1.debito = true;
       }
-      console.log(this.novoRegistro1)
+      console.table(this.novoRegistro1)
       this.extratoService.addMovimentacao(this.novoRegistro1)
+      this.ngasto.reset();
       this.showToast('Compra Adicionada!')
     } catch (error) {
       console.error(error)
