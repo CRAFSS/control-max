@@ -11,7 +11,7 @@ import { Observable, Subscribable } from 'rxjs';
 export class ExtratoService {
   
   private extColections: AngularFirestoreCollection<Extrato>
-  private userId : string = "Jo"
+  private userId : string = "anderson"
   constructor(private db: AngularFirestore){
     this.extColections = this.db.collection<Extrato>("Extrato"+this.userId)
     
