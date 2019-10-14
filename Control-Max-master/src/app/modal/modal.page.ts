@@ -13,67 +13,71 @@ import { ExtratoService } from '../services/extrato.service';
   templateUrl: './modal.page.html',
   styleUrls: ['./modal.page.scss'],
 })
-export class ModalPage implements OnInit{
+export class ModalPage implements OnInit {
 
   registros: registro[] = [];
   registrosTest: registro[] = [];
   teste: Extrato = {}
-  parar:any;
-  total:number = 0;
-  debito:boolean = false
-  cretdito:boolean = false
+  parar: any;
+  total: number = 0;
+  debito: boolean = false
+  cretdito: boolean = false
   public teste1 = new Array<Extrato>();
+  public products: Extrato = {};
   private extratoSubscripiton: Subscription;
-  
 
-  @ViewChild('mylist', {static: false})mylist: IonList;
-  
+
+  @ViewChild('mylist', { static: false }) mylist: IonList;
+
   constructor(private modalController: ModalController,
-    private router:Router, 
-    private storageService: StorageService, 
-    private toastController: ToastController, 
+    private router: Router,
+    private storageService: StorageService,
+    private toastController: ToastController,
     private storage: Storage,
     private extratoService: ExtratoService) {
 
-    }
-    
-    //ionViewWillEnter()
-    ngOnInit(){
-      this.listarRegistros(); 
-      /*this.parar = setInterval(() => {
-        /*this.msg();
-        this.extratoSubscripiton = this.extratoService.getAll().subscribe(data =>{
-          this.teste1 = data;
-        })
-      }, 1);*/
-    
-    }
-     pegaTudo(){
-      this.extratoSubscripiton =  this.extratoService.getAll().subscribe(data =>{
+  }
+  //Essa variavel Userid é um teste
+  private Userid = "Jo"
+
+  //ionViewWillEnter()
+  ngOnInit() {
+    this.listarRegistros();
+    /*this.parar = setInterval(() => {
+      /*this.msg();
+      this.extratoSubscripiton = this.extratoService.getAll().subscribe(data =>{
         this.teste1 = data;
-        this.total = 0;
-        for(let i = 0; i < this.teste1.length; i++){
-          console.log("vamos iniciar essa bagaça!!")
-          if(this.teste1[i].tipo == "g"){
-            console.log("Cheguei aqui no G")
-            this.total += this.teste1[i].valor;
-          }else{
-            console.log("Cheguei aqui no D")
-            this.total -= this.teste1[i].valor;
-          }
+      })
+    }, 1);*/
+
+  }
+  pegaTudo() {
+    this.extratoSubscripiton = this.extratoService.getAll().subscribe(data => {
+      this.teste1 = data;
+      this.total = 0;
+      for (let i = 0; i < this.teste1.length; i++) {
+        console.log("vamos iniciar essa bagaça!!")
+        if (this.teste1[i].tipo == "g") {
+          console.log("Cheguei aqui no G")
+          this.total += this.teste1[i].valor;
+        } else {
+          console.log("Cheguei aqui no D")
+          this.total -= this.teste1[i].valor;
         }
-        this.teste1.forEach(element => {
-          
+      }
+      this.teste1.forEach(element => {
+
       })
     })
-    }
+  }
 
   fechar() {
     clearInterval(this.parar)
     this.modalController.dismiss();
   }
 
-  async listarRegistros(){
+  async listarRegistros() {
+    //this.extrato("jo")
     this.pegaTudo()
     //console.log("Estou dentro do listar Registros.")
     //console.log(this.teste1.length)
@@ -112,29 +116,48 @@ export class ModalPage implements OnInit{
         
       }});*/
   }
+  
 
-  async deletarMovimentacao(id){
-    try{
-      await this.extratoService.deleteMovimentacao(id);
-      this.pegaTudo()
-      this.showToast("Item deletado com sucesso!!")
-    }catch (erro){
-      this.showToast(erro)
+  extrato(Userid: string) {
+    this.extratoSubscripiton = this.extratoService.getYourMove(Userid).subscribe(data => {
+      this.products = data;
+      console.log(this.products)
+      this.total = 0;
+      for(let i = 0; i< this.teste1.length; i++){
+      console.log("vamos iniciar essa bagaça!!")
+      if (this.teste1[i].tipo == "g") {
+        console.log("Cheguei aqui no G")
+        this.total += this.teste1[i].valor;
+      } else {
+        console.log("Cheguei aqui no D")
+        this.total -= this.teste1[i].valor;
+      }
     }
+  })
+}
+async deletarMovimentacao(id){
+  try {
+    await this.extratoService.deleteMovimentacao(id);
+    this.extrato(this.Userid)
+    //this.pegaTudo()
+    this.showToast("Item deletado com sucesso!!")
+  } catch (erro) {
+    this.showToast(erro)
   }
+}
 
-  async showToast(msg) {
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 2000
-    });
-    toast.present();
-  }
+async showToast(msg) {
+  const toast = await this.toastController.create({
+    message: msg,
+    duration: 2000
+  });
+  toast.present();
+}
 
-  chahistorico(){
-    clearInterval(this.parar)
-    this.modalController.dismiss();
-    this.router.navigateByUrl('historico')
-  }
+chahistorico(){
+  clearInterval(this.parar)
+  this.modalController.dismiss();
+  this.router.navigateByUrl('historico')
+}
 
 }
