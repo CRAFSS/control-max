@@ -18,7 +18,7 @@
           <ion-label></ion-label>
         </ion-list-header>
 
-        <p  id="test">Nenhuma compra foi adicionada ainda</p>
+        <p *ngIf="!hst.length" id="test">Nenhuma compra foi adicionada ainda</p>
     
         <ion-item-sliding *ngFor="let e of hst">     
           <ion-item>

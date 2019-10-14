@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/fire
 import { Extrato } from '../models/extrato';
 import { map } from "rxjs/operators";
 import { Observable, Subscribable } from 'rxjs';
+import { HistoricoPage } from '../historico/historico.page';
 
 @Injectable({
   providedIn: 'root'
@@ -27,5 +28,8 @@ export class HistoricoService {
         })
       })
     )
+    }
+    addHistorico(historico: Extrato){
+      return this.hstCollections.add(historico);
   }
 }

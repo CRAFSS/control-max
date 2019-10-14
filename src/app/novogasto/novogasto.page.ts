@@ -9,6 +9,8 @@ import { HomePageModule } from '../home/home.module';
 import { HomePage } from '../home/home.page';
 import { ExtratoService } from '../services/extrato.service';
 import { Extrato } from '../models/extrato';
+import { HistoricoService } from '../services/historico.service';
+
 
 
 @Component({
@@ -29,7 +31,8 @@ export class NovogastoPage implements OnInit {
     private toastController: ToastController,
     private storage:Storage,
     private formBuilder: FormBuilder,
-    private extratoService: ExtratoService) { }
+    private extratoService: ExtratoService,
+    private historicoService: HistoricoService) { }
 
   ngOnInit() {
     //habilitar o hammerjs em todas as direções
@@ -84,6 +87,7 @@ export class NovogastoPage implements OnInit {
       }
       console.log(this.novoRegistro1)
       this.extratoService.addMovimentacao(this.novoRegistro1)
+      this.historicoService.addHistorico(this.novoRegistro1)
       this.showToast('Compra Adicionada!')
     } catch (error) {
       console.error(error)

@@ -29,7 +29,7 @@ export class HistoricoPage {
     private alertController:AlertController,
     private historicoService:HistoricoService) { 
 
-      this.historicoSubscription = this.historicoService.getAll().subscribe(data =>{this.hst = data})
+      
     }
 
   //ionViewWillEnter(){
@@ -41,7 +41,7 @@ export class HistoricoPage {
     }, 1);
   }*/
 
-  msg(){
+  /*msg(){
     this.storage.get('historico').then(test => {
       if(test){
         if(this.historico.length !== 0){
@@ -51,21 +51,26 @@ export class HistoricoPage {
         }
       }
     })
-  }
+  }*/
 
   listarHistorico(){
+    this.historicoSubscription = this.historicoService.getAll().subscribe(data =>{
+      this.hst = data
+    })
     console.log("Estou dentro do historico.")
     console.log(this.hst.length)
     if(this.hst.length !== 0){
       console.log("Existe historicos aqui")
       document.getElementById("test").style.display = "none";
     }else{
-      console.log("Eh bixo, não tem nada... E agora??")
+      console.log("NADA DE HISTORICO! PORRA!")
       document.getElementById("test").style.display = "block";
     }
     this.hst
     };
 
+
+    
   /*deletarHistorico(historico:registro){
     this.storageService.deletarHistorico(historico.id).then(hist=>{
       this.showToast('Compra Deletada!');
