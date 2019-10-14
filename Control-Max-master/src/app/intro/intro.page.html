@@ -1,0 +1,31 @@
+<ion-content fullscreen padding scroll-y="false">
+    <ion-slides>
+
+      <ion-slide>
+        <img src="./assets/slide-1.png"/>
+        <h2>Bem vindo ao <b>ControlMax</b></h2>
+        <p>Mantenha suas finanças sobre controle com o <b>ControlMax</b>, de uma maneira fácil, rápido e simple, e evite imprevisto no fim do mês.</p>
+      </ion-slide>
+
+      <ion-slide>
+        <img src="./assets/slide-2.png"/>
+        <h2>O que é o ControMax?</h2>
+        <p><b>ControMax</b> é um gerenciador de gastos que te ajuda em manter o controle na hora da compra.</p>
+      </ion-slide>
+
+      <!--<ion-slide>
+        <img src="https://beta.ionicframework.com/docs/demos/api/slides/slide-3.png"/>
+        <h2>What is Ionic Pro?</h2>
+        <p><b>Ionic Pro</b> is a powerful set of services and features built on top of Ionic Framework that brings a totally new level of app development agility to mobile dev teams.</p>
+      </ion-slide>-->
+
+      <ion-slide>
+        <img src="./assets/slide-4.png"/>
+        <h2>Pronto para começar?</h2>
+        <p>Comece inserindo o seu salário. Você pode inserir ou atualizar-lo mais tarde, nas configurações.</p>
+        <ion-input id="salario" type="number" placeholder="digite o salário"></ion-input>
+        <ion-button (click)="setSalario()" fill="clear">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon></ion-button>
+      </ion-slide>
+
+    </ion-slides>
+  </ion-content>

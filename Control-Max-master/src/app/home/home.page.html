@@ -1,0 +1,20 @@
+<ion-header no-border>
+  <ion-toolbar>
+    <ion-title text-center>
+      Despesas
+    </ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content>
+  <div (click)="presentModal()"  class="iontes" >
+      <p class="gasto"><span>{{testii}}</span> Gasto</p>
+      <p class="baixo">{{(moeda)}} Disponível</p>
+  </div>
+  <button class="vicon" routerLink="/settings">
+    <ion-icon class="icon" name="settings"></ion-icon>
+  </button>
+  <button class="baddd" (click)="novog()" >
+    <ion-icon class="badd" name="add-circle-outline"></ion-icon>
+  </button>
+</ion-content>

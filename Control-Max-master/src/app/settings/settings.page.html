@@ -1,0 +1,17 @@
+<ion-header>
+  <ion-toolbar>
+    <ion-buttons slot="start">
+      <ion-back-button class="back" defaultHref="home"></ion-back-button>
+    </ion-buttons>
+    <ion-title>settings</ion-title>
+  </ion-toolbar>
+</ion-header>
+
+<ion-content (swiperight)="fechar()">
+    <ion-item routerLink="/ajustes">
+      <ion-label>Ajustar salário</ion-label>
+    </ion-item>
+    <ion-item routerLink="/sobre">
+      <ion-label>Sobre</ion-label>
+    </ion-item>
+</ion-content>
