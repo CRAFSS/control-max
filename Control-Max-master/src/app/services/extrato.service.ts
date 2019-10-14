@@ -29,7 +29,14 @@ export class ExtratoService {
     )
   }
   
+  getYourMove(idUser: string){
+    return this.extColections.doc(idUser).valueChanges();
+  }
   addMovimentacao(extrato: Extrato){
     return this.extColections.add(extrato);
+  }
+
+  deleteMovimentacao(id: string){
+    return this.extColections.doc(id).delete();
   }
 }

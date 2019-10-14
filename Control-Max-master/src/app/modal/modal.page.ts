@@ -51,6 +51,7 @@ export class ModalPage implements OnInit{
      pegaTudo(){
       this.extratoSubscripiton =  this.extratoService.getAll().subscribe(data =>{
         this.teste1 = data;
+        this.total = 0;
         for(let i = 0; i < this.teste1.length; i++){
           console.log("vamos iniciar essa bagaça!!")
           if(this.teste1[i].tipo == "g"){
@@ -66,17 +67,6 @@ export class ModalPage implements OnInit{
       })
     })
     }
-  /*msg(){
-    this.storage.get('meus-registros').then(test => {
-      if(test){
-        if(this.registros.length !== 0){
-          document.getElementById("test").style.display = "none";
-        }else{
-          document.getElementById("test").style.display = "block";
-        }
-      }
-    })
-  }*/
 
   fechar() {
     clearInterval(this.parar)
@@ -85,8 +75,9 @@ export class ModalPage implements OnInit{
 
   async listarRegistros(){
     this.pegaTudo()
-    console.log("Estou dentro do listar Registros.")
-    console.log(this.teste1.length)
+    //console.log("Estou dentro do listar Registros.")
+    //console.log(this.teste1.length)
+    this.storage.set("total", this.total)
     /*this.teste1.forEach(element => {
       console.log("vamos iniciar essa bagaça!!")
       if(element.tipo == "g"){
@@ -118,16 +109,18 @@ export class ModalPage implements OnInit{
             this.total -= element.valor;
           }
         });
-        this.storage.set("total", this.total)
+        
       }});*/
   }
 
-  deletarRegistro(registro:registro){
-    this.storageService.deletarRegistro(registro.id).then(registro=>{
-      this.showToast('Compra Deletada!');
-      this.mylist.closeSlidingItems();
-      this.listarRegistros();
-    })
+  async deletarMovimentacao(id){
+    try{
+      await this.extratoService.deleteMovimentacao(id);
+      this.pegaTudo()
+      this.showToast("Item deletado com sucesso!!")
+    }catch (erro){
+      this.showToast(erro)
+    }
   }
 
   async showToast(msg) {
