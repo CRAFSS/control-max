@@ -3,6 +3,7 @@ import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/fire
 import { Extrato } from '../models/extrato';
 import { map } from "rxjs/operators";
 import { Observable, Subscribable } from 'rxjs';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
@@ -11,12 +12,16 @@ import { Observable, Subscribable } from 'rxjs';
 export class ExtratoService {
   
   private extColections: AngularFirestoreCollection<Extrato>
-  private userId : string = "Jo"
-  constructor(private db: AngularFirestore){
-    this.extColections = this.db.collection<Extrato>("Extrato"+this.userId)
+  private userId: string
+
+  constructor(private db: AngularFirestore, private authService: AuthService){
+    //this.pegaUser()
+    //this.extColections = this.db.collection<Extrato>("Extrato"+this.userId)
     
   }
-  
+  async pegaUser(){
+    await this.authService.getAuth().currentUser.uid
+  }
   getAll(){
     return this.extColections.snapshotChanges().pipe(
       map(action => {
@@ -30,9 +35,13 @@ export class ExtratoService {
   }
   
   getYourMove(idUser: string){
+    this.userId = this.authService.getAuth().currentUser.uid
+    this.extColections = this.db.collection<Extrato>("Extrato"+this.userId)
     return this.extColections.doc<Extrato>(idUser).valueChanges();
   }
   addMovimentacao(extrato: Extrato){
+    this.userId = this.authService.getAuth().currentUser.uid
+    this.extColections = this.db.collection<Extrato>("Extrato"+this.userId)
     return this.extColections.add(extrato);
   }
 
