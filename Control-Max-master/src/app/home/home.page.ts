@@ -7,6 +7,9 @@ import { NovogastoPage } from '../novogasto/novogasto.page';
 import { registro } from '../services/storage.service';
 import { Storage } from '@ionic/storage';
 import { HistoricoPage } from '../historico/historico.page';
+import { ExtratoService } from '../services/extrato.service';
+import { Extrato } from '../models/extrato';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-home',
@@ -23,8 +26,19 @@ export class HomePage {
   balanco:number;
   a:number; 
   b:number;
+  total: number = 0;
+  public totalString: String
+  public teste1 = new Array<Extrato>();
+  public products: Extrato = {};
+  private extratoSubscripiton: Subscription;
   
-  constructor(public modalController: ModalController, private storage:Storage, private modal:ModalPage, private hist:HistoricoPage) { }
+  constructor(public modalController: ModalController, 
+    private storage:Storage, 
+    private modal:ModalPage, 
+    private hist:HistoricoPage,
+    private extratoService: ExtratoService) { 
+      this.pegaTudo()
+     }
 
   formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
@@ -60,9 +74,27 @@ export class HomePage {
       this.balanco = this.a + this.b;   
       console.log("balanco "+ this.balanco)
   }
-  
+  pegaTudo() {
+    this.extratoSubscripiton = this.extratoService.getAll().subscribe(data => {
+      this.teste1 = data;
+      this.total = 0;
+      for (let i = 0; i < this.teste1.length; i++) {
+        console.log("vamos iniciar essa bagaça!!")
+        if (this.teste1[i].tipo == "g") {
+          console.log("Cheguei aqui no G")
+          this.total += this.teste1[i].valor;
+        } else {
+          console.log("Cheguei aqui no D")
+          this.total -= this.teste1[i].valor;
+        }
+      }
+    })
+    let conv = this.total
+    this.totalString = (this.formatter.format(conv))
+    console.log(this.totalString)
+  }
 
-  total(){
+  total1(){
     this.storage.get("total").then((soma) =>{
       this.testii = this.formatter.format(soma);
     })

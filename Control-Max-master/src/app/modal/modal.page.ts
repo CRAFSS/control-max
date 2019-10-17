@@ -118,7 +118,7 @@ export class ModalPage implements OnInit {
   }
   
 
-  extrato(Userid: string) {
+  /*extrato(Userid: string) {
     this.extratoSubscripiton = this.extratoService.getYourMove(Userid).subscribe(data => {
       this.products = data;
       console.log(this.products)
@@ -134,12 +134,12 @@ export class ModalPage implements OnInit {
       }
     }
   })
-}
+}*/
 async deletarMovimentacao(id){
   try {
     await this.extratoService.deleteMovimentacao(id);
-    this.extrato(this.Userid)
-    //this.pegaTudo()
+    //this.extrato(this.Userid)
+    this.pegaTudo()
     this.showToast("Item deletado com sucesso!!")
   } catch (erro) {
     this.showToast(erro)

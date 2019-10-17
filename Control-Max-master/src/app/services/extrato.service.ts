@@ -23,6 +23,8 @@ export class ExtratoService {
     await this.authService.getAuth().currentUser.uid
   }
   getAll(){
+    this.userId = this.authService.getAuth().currentUser.uid
+    this.extColections = this.db.collection<Extrato>("Extrato"+this.userId)
     return this.extColections.snapshotChanges().pipe(
       map(action => {
         return action.map(a =>{
@@ -33,12 +35,12 @@ export class ExtratoService {
       })
     )
   }
-  
+  /*NÃO USAR ESTA MERDA MAIS
   getYourMove(idUser: string){
     this.userId = this.authService.getAuth().currentUser.uid
     this.extColections = this.db.collection<Extrato>("Extrato"+this.userId)
     return this.extColections.doc<Extrato>(idUser).valueChanges();
-  }
+  }*/
   addMovimentacao(extrato: Extrato){
     this.userId = this.authService.getAuth().currentUser.uid
     this.extColections = this.db.collection<Extrato>("Extrato"+this.userId)
