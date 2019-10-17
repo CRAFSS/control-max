@@ -4,8 +4,8 @@ import { IonList, ToastController, AlertController, Platform, NavController } fr
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
 import { Extrato } from '../models/extrato';
-import { HistoricoService } from '../services/historico.service';
 import { Subscription } from 'rxjs';
+import { HistoricoService } from '../services/historico.service';
 
 @Component({
   selector: 'app-historico',
@@ -27,17 +27,14 @@ export class HistoricoPage {
     private toastController:ToastController, 
     private storage:Storage, 
     private alertController:AlertController,
-    private historicoService:HistoricoService) { 
-
-      
-    }
+    private historicoService: HistoricoService) { }
 
   //ionViewWillEnter(){
-  ngOnInit(){
+    ngOnInit(){
     this.listarHistorico();
-  }  
+    }
     /*this.loop = setInterval(() => {
-      this.msg();
+      /this.msg();
     }, 1);
   }*/
 
@@ -57,27 +54,27 @@ export class HistoricoPage {
     this.historicoSubscription = this.historicoService.getAll().subscribe(data =>{
       this.hst = data
     })
-    console.log("Estou dentro do historico.")
-    console.log(this.hst.length)
-    if(this.hst.length !== 0){
-      console.log("Existe historicos aqui")
-      document.getElementById("test").style.display = "none";
-    }else{
-      console.log("NADA DE HISTORICO! PORRA!")
-      document.getElementById("test").style.display = "block";
-    }
-    this.hst
-    };
+  
+     /* console.log("Estou dentro do historico.")
+      console.log(this.hst.length)
+      if(this.hst.length !== 0) {
+        console.log("Existe historicos aqui")
+        document.getElementById("test").style.display = "none";
+      }else{
+        console.log("NADA DE HISTORICO! PORRA!")
+        document.getElementById("test").style.display = "block";
+      }
+      this.hst
+    };*/
+  
 
-
-    
   /*deletarHistorico(historico:registro){
     this.storageService.deletarHistorico(historico.id).then(hist=>{
       this.showToast('Compra Deletada!');
       this.mylist.closeSlidingItems();
        setTimeout(()=> this.listarHistorico(), 100)  
-    });
-  }*/
+    });*/
+  }
 
   async showToast(msg) {
     const toast = await this.toastController.create({
@@ -90,7 +87,6 @@ export class HistoricoPage {
   histfechar(){
     clearInterval(this.loop);
     this.nav.pop()
-    
   }
 
   async apagar() {

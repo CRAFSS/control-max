@@ -12,7 +12,7 @@
   </div>
   <div class="campo">
     <ion-list >
-      <p  id="test">Nenhuma compra foi adicionada ainda</p>
+      <p *ngIf="!teste1.length" id="test">Nenhuma compra foi adicionada ainda</p>
       <ion-item-sliding *ngFor="let registro of teste1">     
         <ion-item>
           <ion-label text-wrap>
@@ -25,7 +25,7 @@
           </ion-label>
         </ion-item>
         <ion-item-options  side="end" (ionSwipe)="deletarRegistro(registro)">
-          <ion-item-option [expandable]="true" color="danger" (click)="deletarRegistro(registro)">Deletar</ion-item-option>
+          <ion-item-option [expandable]="true" color="danger" (click)="deletarMovimentacao(registro.id)">Deletar</ion-item-option>
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>

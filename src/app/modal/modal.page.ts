@@ -13,51 +13,61 @@ import { ExtratoService } from '../services/extrato.service';
   templateUrl: './modal.page.html',
   styleUrls: ['./modal.page.scss'],
 })
-export class ModalPage implements OnInit{
+export class ModalPage implements OnInit {
 
   registros: registro[] = [];
   registrosTest: registro[] = [];
   teste: Extrato = {}
-  parar:any;
-  total:number = 0;
-  debito:boolean = false
-  cretdito:boolean = false
+  parar: any;
+  total: number = 0;
+  debito: boolean = false
+  cretdito: boolean = false
   public teste1 = new Array<Extrato>();
+  public products: Extrato = {};
   private extratoSubscripiton: Subscription;
-  
 
-  @ViewChild('mylist', {static: false})mylist: IonList;
-  
+
+  @ViewChild('mylist', { static: false }) mylist: IonList;
+
   constructor(private modalController: ModalController,
-    private router:Router, 
-    private storageService: StorageService, 
-    private toastController: ToastController, 
+    private router: Router,
+    private storageService: StorageService,
+    private toastController: ToastController,
     private storage: Storage,
     private extratoService: ExtratoService) {
 
+  }
+  //Essa variavel Userid é um teste
+  private Userid = "Jo"
+
+  //ionViewWillEnter()
+  ngOnInit() {
+    this.listarRegistros();
+    /*this.parar = setInterval(() => {
+      /*this.msg();
       this.extratoSubscripiton = this.extratoService.getAll().subscribe(data =>{
         this.teste1 = data;
       })
-  }
-  
-  //ionViewWillEnter()
-  ngOnInit(){
-    this.listarRegistros();
-    /*this.parar = setInterval(() => {
-      this.msg();
     }, 1);*/
-    
-  }
 
-  msg(){
-    this.storage.get('meus-registros').then(test => {
-      if(test){
-        if(this.registros.length !== 0){
-          document.getElementById("test").style.display = "none";
-        }else{
-          document.getElementById("test").style.display = "block";
+  }
+  pegaTudo() {
+    this.extratoSubscripiton = this.extratoService.getAll().subscribe(data => {
+      this.teste1 = data;
+      this.total = 0;
+      for (let i = 0; i < this.teste1.length; i++) {
+        console.log("vamos iniciar essa bagaça!!")
+        if (this.teste1[i].tipo == "g") {
+          console.log("Cheguei aqui no G")
+          this.total += this.teste1[i].valor;
+        } else {
+          console.log("Cheguei aqui no D")
+          this.total -= this.teste1[i].valor;
         }
       }
+      this.teste1.forEach(element => {
+
+      })
     })
   }
 
@@ -66,17 +76,13 @@ export class ModalPage implements OnInit{
     this.modalController.dismiss();
   }
 
-  listarRegistros(){
-    console.log("Estou dentro do listar Registros.")
-    console.log(this.teste1.length)
-    if(this.teste1.length !== 0){
-      console.log("Existe registro aqui")
-      document.getElementById("test").style.display = "none";
-    }else{
-      console.log("Eh bixo, não tem nada... E agora??")
-      document.getElementById("test").style.display = "block";
-    }
-    this.teste1.forEach(element => {
+  async listarRegistros() {
+    //this.extrato("jo")
+    this.pegaTudo()
+    //console.log("Estou dentro do listar Registros.")
+    //console.log(this.teste1.length)
+    this.storage.set("total", this.total)
+    /*this.teste1.forEach(element => {
       console.log("vamos iniciar essa bagaça!!")
       if(element.tipo == "g"){
         console.log("Cheguei aqui no G")
@@ -107,30 +113,51 @@ export class ModalPage implements OnInit{
             this.total -= element.valor;
           }
         });
-        this.storage.set("total", this.total)
+        
       }});*/
   }
+  
 
-  deletarRegistro(registro:registro){
-    this.storageService.deletarRegistro(registro.id).then(registro=>{
-      this.showToast('Compra Deletada!');
-      this.mylist.closeSlidingItems();
-      this.listarRegistros();
-    })
+  extrato(Userid: string) {
+    this.extratoSubscripiton = this.extratoService.getYourMove(Userid).subscribe(data => {
+      this.products = data;
+      console.log(this.products)
+      this.total = 0;
+      for(let i = 0; i< this.teste1.length; i++){
+      console.log("vamos iniciar essa bagaça!!")
+      if (this.teste1[i].tipo == "g") {
+        console.log("Cheguei aqui no G")
+        this.total += this.teste1[i].valor;
+      } else {
+        console.log("Cheguei aqui no D")
+        this.total -= this.teste1[i].valor;
+      }
+    }
+  })
+}
+async deletarMovimentacao(id){
+  try {
+    await this.extratoService.deleteMovimentacao(id);
+    this.extrato(this.Userid)
+    //this.pegaTudo()
+    this.showToast("Item deletado com sucesso!!")
+  } catch (erro) {
+    this.showToast(erro)
   }
+}
 
-  async showToast(msg) {
-    const toast = await this.toastController.create({
-      message: msg,
-      duration: 2000
-    });
-    toast.present();
-  }
+async showToast(msg) {
+  const toast = await this.toastController.create({
+    message: msg,
+    duration: 2000
+  });
+  toast.present();
+}
 
-  chahistorico(){
-    clearInterval(this.parar)
-    this.modalController.dismiss();
-    this.router.navigateByUrl('historico')
-  }
+chahistorico(){
+  clearInterval(this.parar)
+  this.modalController.dismiss();
+  this.router.navigateByUrl('historico')
+}
 
 }

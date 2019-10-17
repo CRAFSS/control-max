@@ -12,7 +12,6 @@ import { Extrato } from '../models/extrato';
 import { HistoricoService } from '../services/historico.service';
 
 
-
 @Component({
   selector: 'app-novogasto',
   templateUrl: './novogasto.page.html',
@@ -71,9 +70,8 @@ export class NovogastoPage implements OnInit {
   }
 
   addRegistro(){
-    this.novoRegistro1.id = Date.now().toString();
     this.novoRegistro1.modificado = Date.now();
-
+    //this.novoRegistro1.idUser = "Jo"
     // Código para adicionar novos gastos no Firebase
     try {
       if(this.novoRegistro1.tipo == "g"){
@@ -85,9 +83,10 @@ export class NovogastoPage implements OnInit {
         this.novoRegistro1.credito = false;
         this.novoRegistro1.debito = true;
       }
-      console.log(this.novoRegistro1)
+      console.table(this.novoRegistro1)
       this.extratoService.addMovimentacao(this.novoRegistro1)
       this.historicoService.addHistorico(this.novoRegistro1)
+      this.ngasto.reset();
       this.showToast('Compra Adicionada!')
     } catch (error) {
       console.error(error)

@@ -1,14 +1,11 @@
 import { Injectable } from '@angular/core';
-import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
+import { AngularFirestore, AngularFirestoreCollection} from "@angular/fire/firestore";
 import { Extrato } from '../models/extrato';
 import { map } from "rxjs/operators";
-import { Observable, Subscribable } from 'rxjs';
-import { HistoricoPage } from '../historico/historico.page';
 
 @Injectable({
   providedIn: 'root'
 })
-
 export class HistoricoService {
   
   private hstCollections: AngularFirestoreCollection<Extrato>
