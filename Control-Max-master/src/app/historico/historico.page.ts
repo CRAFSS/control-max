@@ -3,6 +3,9 @@ import { StorageService, registro } from '../services/storage.service';
 import { IonList, ToastController, AlertController, Platform, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Router } from '@angular/router';
+import { Extrato } from '../models/extrato';
+import { Subscription } from 'rxjs';
+import { HistoricoService } from '../services/historico.service';
 
 @Component({
   selector: 'app-historico',
@@ -14,18 +17,28 @@ export class HistoricoPage {
   historico: registro[] = [];
   loop:any;
 
+  public hst = Array<Extrato>();
+  private historicoSubscription: Subscription;
+
   @ViewChild('mylist', {static: false})mylist: IonList;
 
-  constructor(private nav:NavController,private storageService:StorageService, private toastController:ToastController, private storage:Storage, private alertController:AlertController) { }
+  constructor(private nav:NavController,
+    private storageService:StorageService, 
+    private toastController:ToastController, 
+    private storage:Storage, 
+    private alertController:AlertController,
+    private historicoService: HistoricoService) { }
 
-  ionViewWillEnter(){
+  //ionViewWillEnter(){
+    ngOnInit(){
     this.listarHistorico();
-    this.loop = setInterval(() => {
+    }
+    /*this.loop = setInterval(() => {
       this.msg();
     }, 1);
-  }
+  }*/
 
-  msg(){
+  /*msg(){
     this.storage.get('historico').then(test => {
       if(test){
         if(this.historico.length !== 0){
@@ -35,13 +48,12 @@ export class HistoricoPage {
         }
       }
     })
-  }
+  }*/
 
   listarHistorico(){
-    this.storageService.listaHistorico().then(lhistorico =>{
-      this.historico = lhistorico;
-    });
-  }
+    this.historicoSubscription = this.historicoService.getAll().subscribe(data =>{
+      this.hst = data
+    })
 
   /*deletarHistorico(historico:registro){
     this.storageService.deletarHistorico(historico.id).then(hist=>{
@@ -51,6 +63,7 @@ export class HistoricoPage {
     });
   }*/
 
+}
   async showToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
