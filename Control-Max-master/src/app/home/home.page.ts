@@ -88,10 +88,10 @@ export class HomePage {
           this.total -= this.teste1[i].valor;
         }
       }
+      let conv = this.total
+      this.totalString = (this.formatter.format(conv))
+      console.log(this.totalString)
     })
-    let conv = this.total
-    this.totalString = (this.formatter.format(conv))
-    console.log(this.totalString)
   }
 
   total1(){
