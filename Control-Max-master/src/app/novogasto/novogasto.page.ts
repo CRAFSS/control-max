@@ -69,7 +69,7 @@ export class NovogastoPage implements OnInit {
 
   addRegistro(){
     this.novoRegistro1.modificado = Date.now();
-    this.novoRegistro1.idUser = "Jo"
+    //this.novoRegistro1.idUser = "Jo"
     // Código para adicionar novos gastos no Firebase
     try {
       if(this.novoRegistro1.tipo == "g"){

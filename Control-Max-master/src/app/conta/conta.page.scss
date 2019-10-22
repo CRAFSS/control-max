@@ -1,0 +1,14 @@
+ion-back-button{
+    --color: #993399; 
+}
+ion-button{
+    color: red;
+}
+
+.button-clear{
+    --background-activated: transparent;
+    --background-focused: rgba(var(--ion-color-primary-rgb,56,128,255),0.1);
+    --background-hover: rgba(var(--ion-color-primary-rgb,56,128,255),0.04);
+    --color-activated:  rgb(151, 0, 0) !important; 
+    --color-focused:  rgb(151, 0, 0) !important;
+}
