@@ -1,5 +1,5 @@
-import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { Component, OnInit, ViewChild } from '@angular/core';
+import { ModalController, Platform } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { animacaoEntrada } from '../testeAnimacao/entrar';
 import { anicacaoSaida } from '../testeAnimacao/sair';
@@ -23,6 +23,9 @@ export class HomePage {
   moeda:string;
   storageService: any;
   testii:string;
+  balanco:number;
+  a:number; 
+  b:number;
   total: number = 0;
   public totalString: String
   public teste1 = new Array<Extrato>();
@@ -36,8 +39,7 @@ export class HomePage {
     private extratoService: ExtratoService) { 
       this.pegaTudo()
      }
-  
-  // Variável que formata o total do usuário para ser exibido como valor monetário. (EX: R$ 1.000,00)
+
   formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -50,11 +52,28 @@ export class HomePage {
     var hammertime = new Hammer(document.body);
     hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
     
+    /*setInterval(() => {
+      this.pegarSalario();
+      this.total();
+      this.modal.listarRegistros();
+      this.hist.listarHistorico();
+    }, 1000);
+    this.balancos();
+    console.log(this.a)*/
   }
 
-
-
-  //Função que resgata os dados do banco de dados faz os calculos dos valores e deixa exibe na home.
+  async balancos(){
+    this.storage.get("salario").then((a1) => {
+       this.a= a1
+       console.log("a "+typeof(this.a));
+      })
+      this.storage.get("total").then((b1) => {
+        this.b= b1
+        console.log("b "+typeof(this.b))
+      });
+      this.balanco = this.a + this.b;   
+      console.log("balanco "+ this.balanco)
+  }
   pegaTudo() {
     this.extratoSubscripiton = this.extratoService.getAll().subscribe(data => {
       this.teste1 = data;
@@ -64,20 +83,23 @@ export class HomePage {
         if (this.teste1[i].tipo == "g") {
           console.log("Cheguei aqui no G")
           this.total += this.teste1[i].valor;
-          console.log(this.total)
         } else {
           console.log("Cheguei aqui no D")
           this.total -= this.teste1[i].valor;
-          console.log(this.total)
         }
-        let conv = this.total
-        this.totalString = (this.formatter.format(conv))
-        console.log("Esse é o totalString:"+this.totalString+", Esse é o total: "+this.total)
       }
+      let conv = this.total
+      this.totalString = (this.formatter.format(conv))
+      console.log(this.totalString)
     })
   }
 
-  //Função que constroi modal da página que exibe todos as movimentações
+  total1(){
+    this.storage.get("total").then((soma) =>{
+      this.testii = this.formatter.format(soma);
+    })
+  }
+
   async presentModal() {
     const modal = await this.modalController.create({
       component: ModalPage,
@@ -86,15 +108,14 @@ export class HomePage {
     });
     return await modal.present();
   }
-  //Função que controi modal da página que acrescenta novas movimentações
+
   async novog() {
     const modal = await this.modalController.create({
       component: NovogastoPage
     });
     return await modal.present();
   }
-  
-  //Função para "destriur o modal aberto"
+
   fechar() {
     this.modalController.dismiss();
   }
