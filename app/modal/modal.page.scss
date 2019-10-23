@@ -1,0 +1,87 @@
+.close,
+.historico{
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    z-index: 3;
+}
+
+.hist,
+.icon{
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    z-index: 3;
+    top: 5%;
+    border:none;
+    background: white;
+}
+
+.hist{
+    right: 14%;
+}
+
+.icon{
+    left: 87%;
+}
+
+.campo{
+    height: 90%;
+    margin-top:20%;
+    z-index: 0;
+}
+
+#test{
+    padding: 10%;
+    margin-left:8%;
+    margin-top:40%;
+    display: block;
+}
+
+.letra{
+    position: fixed;
+    top:8%;
+    left:5%;
+    z-index: 3;
+}
+
+.clear{
+    position: fixed;
+    width: 100%;
+    height: 15%;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 2;
+    //backdrop-filter: blur(10px);  
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.money{
+    color: black;
+}
+
+@media (min-width: 650px){
+    #test{
+        margin-top: 20%;
+        margin-left: 15%;
+    }
+
+    .campo{
+        margin-top: 8%;
+    }
+}
+
+.red{
+    color: red;
+}
+
+.blue{
+    color: blue;
+}
+
+.saldo{
+    margin-left: 5%;
+}
