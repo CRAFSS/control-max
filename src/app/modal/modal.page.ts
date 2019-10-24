@@ -36,13 +36,11 @@ export class ModalPage implements OnInit {
     private extratoService: ExtratoService) {
 
   }
-  //Essa variavel Userid é um teste
-  private Userid = "Jo"
-
   
   ngOnInit() {
     this.listarRegistros();
   }
+  
   //função para listar as movimentações
   pegaTudo() {
     this.extratoSubscripiton = this.extratoService.getAll().subscribe(data => {
@@ -63,6 +61,7 @@ export class ModalPage implements OnInit {
       })
     })
   }
+  
   //função para fechar o modal
   fechar() {
     clearInterval(this.parar)
