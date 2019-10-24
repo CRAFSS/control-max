@@ -19,7 +19,7 @@ export class CadastroPage implements OnInit {
   ngOnInit() {
   }
 
-
+//função para criar usuário com tratamento de erros
   async registor(){
     await this.presentLoading();
     
@@ -57,6 +57,7 @@ export class CadastroPage implements OnInit {
 
   }
 
+  //função para aparecer janela de confirmação
   async presentToast(mensagem:string) {
     const toast = await this.toastController.create({
       message: mensagem,
@@ -64,7 +65,7 @@ export class CadastroPage implements OnInit {
     });
     toast.present();
   }
-
+  //função para aparecer rodinha de carregamento
   async presentLoading() {
     this.loading = await this.loadingController.create({message: 'Carregando'});
     return this.loading.present();

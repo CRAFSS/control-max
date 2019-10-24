@@ -12,7 +12,7 @@ export class SobrePage implements OnInit {
 
   ngOnInit() {
   }
-
+// função de botão de voltar página
   fechar() {
     this.nav.pop()
   }

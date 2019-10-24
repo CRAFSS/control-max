@@ -12,7 +12,7 @@ export class AuthGuard implements CanActivate {
     private router:Router
   ){}
 
-
+//função para quando um usuário não estiver logado ele seja redirecionado para a página de login
  canActivate(): Promise<boolean> {
    return new Promise(resolve => {
      this.auth.getAuth().onAuthStateChanged(user => {

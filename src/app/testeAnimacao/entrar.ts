@@ -1,5 +1,5 @@
 import { Animation } from '@ionic/core';
-
+// Animação de Entrada NÃO MEXA PANGARÉ!!!!
 export function animacaoEntrada(AnimationC: Animation, baseEl: HTMLElement): Promise<Animation> {
 
     const baseAnimation = new AnimationC();

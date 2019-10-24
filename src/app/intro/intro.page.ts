@@ -10,7 +10,6 @@ import { Storage } from '@ionic/storage';
 export class IntroPage implements OnInit {
 
   salario:string;
-  //moeda:number;
 
   constructor(    
     private storage: Storage,

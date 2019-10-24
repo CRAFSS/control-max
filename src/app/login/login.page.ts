@@ -15,11 +15,15 @@ export class LoginPage implements OnInit {
  private loading;
  userlog: User = {};
 
-  constructor(private router:Router, private authserv:AuthService, private loadingController:LoadingController, private toastController:ToastController) { }
+  constructor(private router:Router, 
+    private authserv:AuthService, 
+    private loadingController:LoadingController, 
+    private toastController:ToastController) { }
 
   ngOnInit() {
   }
 
+  //função de login com tratamento de erros
   async login(){
     await this.presentLoading();
     
@@ -46,7 +50,7 @@ export class LoginPage implements OnInit {
             break;                                    
 
           case 'auth/network-request-failed':
-            mens = "Falha na conexão. Certifique-se que esteja conectado a internet.";
+            mens = "Falha na conexão. Certifique-se de está conectado a internet.";
             break;                                    
         }
         this.presentToast(mens);
@@ -55,6 +59,7 @@ export class LoginPage implements OnInit {
     }
   }
 
+  //função para aparecer janela de confirmação
   async presentToast(mensagem:string) {
     const toast = await this.toastController.create({
       message: mensagem,
@@ -63,10 +68,12 @@ export class LoginPage implements OnInit {
     toast.present();
   }
 
+  //navegar para a página de cadastro
   cad(){
     this.router.navigate(['cadastro'])
   }
 
+  //função para aparecer a rodinha de carregar
   async presentLoading() {
     this.loading = await this.loadingController.create({message: 'Carregando'});
     return this.loading.present();

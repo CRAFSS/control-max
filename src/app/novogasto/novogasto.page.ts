@@ -5,11 +5,9 @@ import { StorageService } from '../services/storage.service';
 import { ToastController} from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
-import { HomePageModule } from '../home/home.module';
-import { HomePage } from '../home/home.page';
 import { ExtratoService } from '../services/extrato.service';
 import { Extrato } from '../models/extrato';
-
+import { HistoricoService } from '../services/historico.service';
 
 @Component({
   selector: 'app-novogasto',
@@ -25,17 +23,17 @@ export class NovogastoPage implements OnInit {
   cretdito:boolean = false
 
   constructor(public modalController: ModalController,
-    private storageService: StorageService, 
     private toastController: ToastController,
     private storage:Storage,
     private formBuilder: FormBuilder,
-    private extratoService: ExtratoService) { }
+    private extratoService: ExtratoService,
+    private historicoService: HistoricoService) { }
 
   ngOnInit() {
     //habilitar o hammerjs em todas as direções
     var hammertime = new Hammer(document.body);
     hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-
+    //Validação do formulário
     this.ngasto = this.formBuilder.group({
       lugar: [
         '',
@@ -66,11 +64,10 @@ export class NovogastoPage implements OnInit {
   fechar() {
     this.modalController.dismiss();
   }
-
+  // Código para adicionar novos gastos no Firebase
   addRegistro(){
     this.novoRegistro1.modificado = Date.now();
-    //this.novoRegistro1.idUser = "Jo"
-    // Código para adicionar novos gastos no Firebase
+
     try {
       if(this.novoRegistro1.tipo == "g"){
         console.log("Credito")
@@ -83,6 +80,7 @@ export class NovogastoPage implements OnInit {
       }
       console.table(this.novoRegistro1)
       this.extratoService.addMovimentacao(this.novoRegistro1)
+      this.historicoService.addHistorico(this.novoRegistro1)
       this.ngasto.reset();
       this.showToast('Compra Adicionada!')
     } catch (error) {
@@ -90,16 +88,10 @@ export class NovogastoPage implements OnInit {
     }finally{
       console.log("Eu gosto de mim!!!!")
     }
-    /*this.storageService.addRegistro(this.novoRegistro).then(registro => {
-      this.novoRegistro = <registro>{};
-      this.showToast('Compra Adicionada!')
-    })
-    this.storageService.addhistoric(this.novoRegistro).then(registro => {
-      this.novoRegistro = <registro>{};
-    })*/
-    //console.log(this.novoRegistro)
+    
   }
 
+  //função para aparecer janela de confirmação
   async showToast(msg) {
     const toast = await this.toastController.create({
       message: msg,

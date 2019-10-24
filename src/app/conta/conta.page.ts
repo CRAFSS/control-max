@@ -13,11 +13,11 @@ export class ContaPage implements OnInit {
 
   ngOnInit() {
   }
-
+//função para deslogar
   logout(){
     this.test.logout();
   }
-
+//função para voltar á página anterior
   fechar() {
     this.nav.pop()
   }

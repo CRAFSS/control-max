@@ -39,7 +39,8 @@ export class HomePage {
     private extratoService: ExtratoService) { 
       this.pegaTudo()
      }
-
+  
+  //formatar número inteiro para moeda
   formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -51,15 +52,6 @@ export class HomePage {
     //habilitar swipe em todas a direções
     var hammertime = new Hammer(document.body);
     hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
-    
-    /*setInterval(() => {
-      this.pegarSalario();
-      this.total();
-      this.modal.listarRegistros();
-      this.hist.listarHistorico();
-    }, 1000);
-    this.balancos();
-    console.log(this.a)*/
   }
 
   async balancos(){
@@ -74,6 +66,8 @@ export class HomePage {
       this.balanco = this.a + this.b;   
       console.log("balanco "+ this.balanco)
   }
+
+  //função para mostrar o total na home
   pegaTudo() {
     this.extratoSubscripiton = this.extratoService.getAll().subscribe(data => {
       this.teste1 = data;
@@ -100,6 +94,7 @@ export class HomePage {
     })
   }
 
+  //função para chamar o modal de movimentações
   async presentModal() {
     const modal = await this.modalController.create({
       component: ModalPage,
@@ -109,6 +104,7 @@ export class HomePage {
     return await modal.present();
   }
 
+  //função para chamar o modal de novos gastos
   async novog() {
     const modal = await this.modalController.create({
       component: NovogastoPage
@@ -119,22 +115,17 @@ export class HomePage {
   fechar() {
     this.modalController.dismiss();
   }
-
+  //função para somar todos os gastos
   pegarSalario(){
     let salario;
     this.storage.get('salario').then((val) => {
       this.moeda = val
-      //this.formatter.format(val);
       this.storage.get("total").then((soma) =>{
         this.testii = soma
-        //this.formatter.format(soma);
         let temp = Number(this.moeda) + Number(this.testii); 
         this.testii = this.formatter.format(Number(this.testii))
         this.moeda = this.formatter.format(Number(temp))
       })
     });
-    //this.testii = this.formatter.format(this.testii);
   }
-
-
 }

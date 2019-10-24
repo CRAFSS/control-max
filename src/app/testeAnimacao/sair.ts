@@ -1,5 +1,5 @@
 import { Animation } from '@ionic/core';
-
+// ANIMAÇÃO DE SAIDA NÃO MEXER!!!
 export function anicacaoSaida(AnimationC: Animation, baseEl: HTMLElement): Promise<Animation> {
 
     const baseAnimation = new AnimationC();

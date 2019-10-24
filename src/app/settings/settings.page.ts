@@ -13,7 +13,7 @@ export class SettingsPage implements OnInit {
   ngOnInit() {
 
   }
-
+// função de botão de voltar página
   fechar() {
     this.nav.pop()
   }

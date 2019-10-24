@@ -16,8 +16,11 @@ export class AjustesPage implements OnInit {
 
   nsalario:FormGroup;
 
-  constructor(private formBuilder: FormBuilder, private storage:Storage, private nav:NavController) { }
+  constructor(private formBuilder: FormBuilder, 
+    private storage:Storage, 
+    private nav:NavController) { }
   
+  //formatar número inteiro para moeda
   formatter = new Intl.NumberFormat('pt-BR', {
     style: 'currency',
     currency: 'BRL',
@@ -28,7 +31,7 @@ export class AjustesPage implements OnInit {
     setInterval(() => {
       this.pegarSalario()
     }, 100);
-
+    //Validações do formulário
     this.nsalario = this.formBuilder.group({
       salario: [
         '',
@@ -41,10 +44,7 @@ export class AjustesPage implements OnInit {
     })
   }
 
-  ionViewWillEnter() {
-    
-  }
-
+  //função para voltar á página anterior
   fechar() {
     this.nav.pop()
   }
