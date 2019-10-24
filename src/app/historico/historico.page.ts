@@ -51,7 +51,7 @@ export class HistoricoPage {
     this.nav.pop()
   }
 
-  async apagar() {
+  async apagar(hst: Array<Extrato>) {
     const alert = await this.alertController.create({
       header: 'Você realmente deseja apagar o histórico?',
       message: 'Isso apagará todo o histórico, sem posibilidade de recuperação',
@@ -66,8 +66,8 @@ export class HistoricoPage {
         }, {
           text: 'Sim',
           handler: () => {
-            this.storage.set("historico", []);
-            setTimeout(()=> this.listarHistorico(), 100)
+            //console.log(hst.length())
+            this.listarHistorico()
           }
         }
       ]
@@ -76,5 +76,15 @@ export class HistoricoPage {
     await alert.present();
   }
 
+  async deletarMovimentacao(id){
+    try {
+      await this.historicoService.deleteHistory(id);
+      //this.pegaTudo()
+      this.showToast("Item deletado com sucesso!!")
+    } catch (erro) {
+      this.showToast(erro)
+    }
+    this.listarHistorico()
+  }
 
 }

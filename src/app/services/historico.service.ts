@@ -39,4 +39,11 @@ export class HistoricoService {
     this.userId = this.authService.getAuth().currentUser.uid
     this.hstCollections = this.db.collection<Extrato>("Historico"+this.userId)
   }
+
+  deleteHistory(id: string){
+    return this.hstCollections.doc(id).delete()
+  }
+  deleteAll(){
+    return this.hstCollections.doc().delete()
+  }
 }

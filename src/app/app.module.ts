@@ -12,12 +12,9 @@ import { IonicStorageModule } from '@ionic/storage';
 import { IntroPage } from './intro/intro.page';
 import { AjustesPage } from './ajustes/ajustes.page';
 import { ModalPage } from './modal/modal.page';
-import { ReactiveFormsModule } from '@angular/forms';
 import { HistoricoPage } from './historico/historico.page';
 import { HomePage } from './home/home.page';
 import { AngularFireModule } from "@angular/fire";
-import { environment } from '../environments/environment';
-import { AngularFireAuth } from "@angular/fire/auth";
 import { AngularFirestoreModule } from "@angular/fire/firestore";
 import { AngularFireAuthModule } from '@angular/fire/auth';
 
@@ -29,7 +26,7 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
   entryComponents: [
 
   ],
-  imports: [
+ imports: [
     BrowserModule, 
     IonicModule.forRoot({
       backButtonText: 'Voltar'
@@ -38,8 +35,18 @@ import { AngularFireAuthModule } from '@angular/fire/auth';
     ModalPageModule,
     NovogastoPageModule,
     IonicStorageModule.forRoot(),
-    AngularFireModule.initializeApp(environment.fireBase),
-    AngularFirestoreModule,
+    AngularFireModule.initializeApp(
+      {
+     apiKey: "AIzaSyB4fRb3O1F3QgzS62OqgpkBrrCZIAJtYg8",
+    authDomain: "controlmax-b24a2.firebaseapp.com",
+    databaseURL: "https://controlmax-b24a2.firebaseio.com",
+    projectId: "controlmax-b24a2",
+    storageBucket: "controlmax-b24a2.appspot.com",
+    messagingSenderId: "413682781030",
+    appId: "1:413682781030:web:e4f4bc1c1998143cb0d6a7",
+    measurementId: "G-YV372D3R9C"
+    }),
+    AngularFirestoreModule.enablePersistence(),
     AngularFireAuthModule
   ],
   providers: [

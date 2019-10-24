@@ -29,7 +29,9 @@
         </ion-item-options>
       </ion-item-sliding>
     </ion-list>
-    <ion-list class="saldo"><ion-label position="floating">Saldo</ion-label><p>{{total | currency:'R$ '}}</p></ion-list>
-  </div>      
+  </div>    
 </ion-content>
+    <ion-footer>
+        <ion-list class="saldo"><ion-label position="floating">Saldo</ion-label><p id="saldo">{{total | currency:'R$ '}}</p></ion-list>
+    </ion-footer>  
     

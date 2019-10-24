@@ -34,7 +34,7 @@ export class ModalPage implements OnInit {
     private toastController: ToastController,
     private storage: Storage,
     private extratoService: ExtratoService) {
-
+      
   }
   
   ngOnInit() {
@@ -56,9 +56,6 @@ export class ModalPage implements OnInit {
           this.total -= this.teste1[i].valor;
         }
       }
-      this.teste1.forEach(element => {
-
-      })
     })
   }
   
