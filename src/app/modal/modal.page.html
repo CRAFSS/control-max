@@ -12,8 +12,8 @@
   </div>
   <div class="campo">
     <ion-list >
-      <p *ngIf="!teste1.length" id="test">Nenhuma compra foi adicionada ainda</p>
-      <ion-item-sliding *ngFor="let registro of teste1">     
+      <p *ngIf="!extrato.length" id="test">Nenhuma compra foi adicionada ainda</p>
+      <ion-item-sliding *ngFor="let registro of extrato">     
         <ion-item>
           <ion-label text-wrap>
             <h3>{{ registro.lugar }}</h3>

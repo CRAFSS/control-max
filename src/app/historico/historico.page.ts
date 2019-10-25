@@ -1,5 +1,4 @@
 import { Component, OnInit, ViewChild } from '@angular/core';
-import { StorageService, registro } from '../services/storage.service';
 import { IonList, ToastController, AlertController, Platform, NavController } from '@ionic/angular';
 import { Storage } from '@ionic/storage';
 import { Extrato } from '../models/extrato';
@@ -13,31 +12,28 @@ import { HistoricoService } from '../services/historico.service';
 })
 export class HistoricoPage {
 
-  //historico: registro[] = [];
-  loop:any;
-
+  loop: any;
   public hst = Array<Extrato>();
   private historicoSubscription: Subscription;
 
-  @ViewChild('mylist', {static: false})mylist: IonList;
+  @ViewChild('mylist', { static: false }) mylist: IonList;
 
-  constructor(private nav:NavController,
-    private toastController:ToastController, 
-    private storage:Storage, 
-    private alertController:AlertController,
+  constructor(private nav: NavController,
+    private toastController: ToastController,
+    private alertController: AlertController,
     private historicoService: HistoricoService) { }
 
-    ngOnInit(){
+  ngOnInit() {
     this.listarHistorico();
-    }
- 
-//função para listar os dados da tabela de historico
-  listarHistorico(){
-    this.historicoSubscription = this.historicoService.getAll().subscribe(data =>{
+  }
+
+  //função para listar os dados da tabela de historico
+  listarHistorico() {
+    this.historicoSubscription = this.historicoService.getAll().subscribe(data => {
       this.hst = data
     })
-}
-//função para aparecer janela de confirmação
+  }
+  //função para aparecer janela de confirmação
   async showToast(msg) {
     const toast = await this.toastController.create({
       message: msg,
@@ -45,8 +41,8 @@ export class HistoricoPage {
     });
     toast.present();
   }
-//função para fechar a tela de historico
-  histfechar(){
+  //função para fechar a tela de historico
+  histfechar() {
     clearInterval(this.loop);
     this.nav.pop()
   }
@@ -67,6 +63,10 @@ export class HistoricoPage {
           text: 'Sim',
           handler: () => {
             console.log(hst.length)
+            for(let i = 0; i < hst.length; i++){
+              console.log(hst[i].id)
+              this.deletarHistory(hst[i].id)
+            }
             this.listarHistorico()
           }
         }
@@ -76,7 +76,7 @@ export class HistoricoPage {
     await alert.present();
   }
 
-  async deletarMovimentacao(id){
+  async deletarMovimentacao(id) {
     try {
       await this.historicoService.deleteHistory(id);
       //this.pegaTudo()
@@ -84,6 +84,16 @@ export class HistoricoPage {
     } catch (erro) {
       this.showToast(erro)
     }
+    this.listarHistorico()
+  }
+  async deletarHistory(id: string) {
+    try {
+      await this.historicoService.deleteHistory(id);
+      //this.pegaTudo()
+    } catch (erro) {
+      this.showToast(erro)
+    }
+    this.showToast("Historico deletado com sucesso!!")
     this.listarHistorico()
   }
 

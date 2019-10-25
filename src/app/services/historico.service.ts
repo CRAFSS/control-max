@@ -43,7 +43,5 @@ export class HistoricoService {
   deleteHistory(id: string) {
     return this.hstCollections.doc(id).delete()
   }
-  deleteAll() {
-    return this.hstCollections.doc().delete()
-  }
+
 }
