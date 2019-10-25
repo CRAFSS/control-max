@@ -54,6 +54,12 @@ export class HomePage {
       }
       let conv = this.total
       this.totalString = (this.formatter.format(conv))
+      console.log(this.total)
+      if (this.total >= 0){
+        document.getElementById("saldo").style.color = "blue"
+      }else{
+        document.getElementById("saldo").style.color = "red"
+      }
     })
   }
 

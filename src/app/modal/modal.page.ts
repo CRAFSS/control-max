@@ -45,6 +45,11 @@ export class ModalPage implements OnInit {
           this.total -= this.extrato[i].valor;
         }
       }
+      if (this.total >= 0) {
+        document.getElementById("sld").style.color = "blue"
+      } else {
+        document.getElementById("sld").style.color = "red"
+      }
     })
   }
 

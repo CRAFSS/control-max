@@ -63,10 +63,11 @@ export class HistoricoPage {
           text: 'Sim',
           handler: () => {
             console.log(hst.length)
-            for(let i = 0; i < hst.length; i++){
+            for (let i = 0; i < hst.length; i++) {
               console.log(hst[i].id)
               this.deletarHistory(hst[i].id)
             }
+            this.showToast("Historico deletado com sucesso!!")
             this.listarHistorico()
           }
         }
@@ -93,7 +94,6 @@ export class HistoricoPage {
     } catch (erro) {
       this.showToast(erro)
     }
-    this.showToast("Historico deletado com sucesso!!")
     this.listarHistorico()
   }
 
