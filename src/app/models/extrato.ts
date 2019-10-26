@@ -5,4 +5,5 @@ export interface Extrato {
     tipo?: string;
     credito?: boolean;
     debito?: boolean;
+    id?: any
 }
