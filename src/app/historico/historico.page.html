@@ -1,26 +1,26 @@
 <ion-content>
 
   <button class="icon" (click)="histfechar()">
-    <ion-icon class="close" name="close" ></ion-icon>
+    <ion-icon class="close" name="close"></ion-icon>
   </button>
   <button class="lixeira" (click)="apagar(hst)">
-    <ion-icon class="close" name="trash" ></ion-icon>
+    <ion-icon class="close" name="trash"></ion-icon>
   </button>
 
-  <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated letra">Histórico</ion-label>
+  <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated letra" (click)="esconde()">Histórico</ion-label>
   <div class="clear"></div>
 
   <div class="campo">
 
-      <ion-list #mylist>
-        
-        <ion-list-header>
-          <ion-label></ion-label>
-        </ion-list-header>
+    <ion-list #mylist>
+      <div id="numeros">
+      <ion-list-header>
+        <ion-label></ion-label>
+      </ion-list-header>
 
-        <p *ngIf="!hst.length" id="test">Nenhuma compra foi adicionada ainda</p>
-    
-        <ion-item-sliding *ngFor="let e of hst">     
+      <p *ngIf="!hst.length" id="test">Nenhuma compra foi adicionada ainda</p>
+      
+        <ion-item-sliding *ngFor="let e of hst">
           <ion-item>
             <ion-label text-wrap>
               <h3>{{ e.lugar }}</h3>
@@ -32,9 +32,13 @@
             <ion-icon name="trash" (click)="deletarMovimentacao(e.id)"></ion-icon>
           </ion-item>
           <ion-item-options side="end">
-              <ion-item-option color="danger" (click)="deletarMovimentacao(e.id)">Deletar</ion-item-option>
-            </ion-item-options> 
-        </ion-item-sliding>   
-      </ion-list>
-    </div>
+            <ion-item-option color="danger" (click)="deletarMovimentacao(e.id)">Deletar</ion-item-option>
+          </ion-item-options>
+        </ion-item-sliding>
+      </div>
+    </ion-list>
+  </div>
+  <div id="grafico">
+    <canvas id="line"></canvas>
+  </div>
 </ion-content>
