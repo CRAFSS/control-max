@@ -27,23 +27,23 @@ export class HistoricoPage {
   ngOnInit() {
     this.listarHistorico();
     setTimeout(() => {
-      this.lineBarsCanvas = this.getChart()
+      this.lineBarsCanvas = this.getChart(this.hst)
     }, 150)
   }
 
   slideoptions={
-    spaceBetween: 10,
+    /*spaceBetween: 10,
     centeredSlides: true,
     //slidesPerView: 1.6,
-    autoHeight: true,
+    //autoHeight: true,
     zoom:{
       maxRatio: 5
-    }
+    }*/
   }
   private dados = [20, 45, 27, 18, 10, 38, 21, 45, 17, 55, 1, 52]
   private dados2 = [30, 25, 27, 8, 20, 18, 1, 35, 17, 15, 31, 22]
 
-  getChart() {
+  getChart(hst) {
     let positivo = []
     let pstTotal = 0
     let negativo = []
@@ -77,7 +77,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [pstTotal],
+        data: this.dados,//[pstTotal],
         scanGaps: false
       },
       {
@@ -90,7 +90,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [ngtTotal],
+        data: this.dados2,//[ngtTotal],
         scanGaps: false
       },
       {
@@ -103,7 +103,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: [loup],
+        //data: [loup],
         scanGaps: false
       }]
     }
@@ -112,7 +112,7 @@ export class HistoricoPage {
         d1[11] - d2[11]]*/
     return new chartJs(ctx, {
       data,
-      type: "bar"
+      type: "line"
     })
   }
   esconde(){
