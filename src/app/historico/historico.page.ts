@@ -27,7 +27,7 @@ export class HistoricoPage {
   ngOnInit() {
     this.listarHistorico();
     setTimeout(() => {
-      this.lineBarsCanvas = this.getChart(this.dados, this.dados2)
+      this.lineBarsCanvas = this.getChart()
     }, 150)
   }
 
@@ -43,7 +43,7 @@ export class HistoricoPage {
   private dados = [20, 45, 27, 18, 10, 38, 21, 45, 17, 55, 1, 52]
   private dados2 = [30, 25, 27, 8, 20, 18, 1, 35, 17, 15, 31, 22]
 
-  getChart(d1, d2) {
+  getChart() {
     let positivo = []
     let pstTotal = 0
     let negativo = []
