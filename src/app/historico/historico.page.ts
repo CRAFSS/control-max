@@ -34,7 +34,7 @@ export class HistoricoPage {
   slideoptions={
     spaceBetween: 10,
     centeredSlides: true,
-    slidesPerView: 1.6,
+    //slidesPerView: 1.6,
     autoHeight: true,
     zoom:{
       maxRatio: 5
