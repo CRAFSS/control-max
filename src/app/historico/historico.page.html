@@ -1,25 +1,19 @@
+<ion-header>
+  <ion-toolbar>
+    <button class="icon" (click)="histfechar()">
+      <ion-icon class="close" name="close"></ion-icon>
+    </button>
+    <button class="lixeira" (click)="apagar(hst)">
+      <ion-icon class="close" name="trash"></ion-icon>
+    </button>
+    <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated letra" (click)="esconde()">Histórico</ion-label>
+  </ion-toolbar>
+</ion-header>
 <ion-content>
-
-  <button class="icon" (click)="histfechar()">
-    <ion-icon class="close" name="close"></ion-icon>
-  </button>
-  <button class="lixeira" (click)="apagar(hst)">
-    <ion-icon class="close" name="trash"></ion-icon>
-  </button>
-
-  <ion-label class="sc-ion-label-ios-h sc-ion-label-ios-s ios hydrated letra" (click)="esconde()">Histórico</ion-label>
-  <div class="clear"></div>
-
-  <div class="campo">
-
-    <ion-list #mylist>
-      <div id="numeros">
-      <ion-list-header>
-        <ion-label></ion-label>
-      </ion-list-header>
-
-      <p *ngIf="!hst.length" id="test">Nenhuma compra foi adicionada ainda</p>
-      
+  <ion-slides [options]="slideoptions">
+    <ion-slide>
+      <div class="campo">
+        <p *ngIf="!hst.length" id="test">Nenhuma compra foi adicionada ainda</p>
         <ion-item-sliding *ngFor="let e of hst">
           <ion-item>
             <ion-label text-wrap>
@@ -36,9 +30,39 @@
           </ion-item-options>
         </ion-item-sliding>
       </div>
-    </ion-list>
-  </div>
-  <div id="grafico">
-    <canvas id="line"></canvas>
-  </div>
+    </ion-slide>
+    <ion-slide>
+      <ion-row>
+        <ion-col >
+          <ion-card id="gfcMaior">
+            <canvas id="line"></canvas>
+            <ion-card-content>
+
+            </ion-card-content>
+          </ion-card>
+        </ion-col>
+      </ion-row>
+    </ion-slide>
+    <ion-slide>
+      <img src="./slide-1.png" />
+      <h2>Welcome to the <b>ICA</b></h2>
+      <p>The <b>ionic conference app</b> is a practical preview of the ionic framework in action, and a demonstration
+        of proper code use.</p>
+    </ion-slide>
+    <ion-slide>
+      <h2>What is Ionic?</h2>
+      <p><b>Ionic Framework</b> is an open source SDK that enables developers to build high quality mobile apps with
+        web technologies like HTML, CSS, and JavaScript.</p>
+    </ion-slide>
+    <ion-slide>
+      <h2>What is Ionic Pro?</h2>
+      <p><b>Ionic Pro</b> is a powerful set of services and features built on top of Ionic Framework that brings a
+        totally new level of app development agility to mobile dev teams.</p>
+    </ion-slide>
+    <ion-slide>
+      <h2>Ready to Play?</h2>
+      <ion-button fill="clear">Continue <ion-icon slot="end" name="arrow-forward"></ion-icon>
+      </ion-button>
+    </ion-slide>
+  </ion-slides>
 </ion-content>

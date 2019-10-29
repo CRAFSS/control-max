@@ -31,6 +31,15 @@ export class HistoricoPage {
     }, 150)
   }
 
+  slideoptions={
+    spaceBetween: 10,
+    centeredSlides: true,
+    slidesPerView: 1.6,
+    autoHeight: true,
+    zoom:{
+      maxRatio: 5
+    }
+  }
   private dados = [20, 45, 27, 18, 10, 38, 21, 45, 17, 55, 1, 52]
   private dados2 = [30, 25, 27, 8, 20, 18, 1, 35, 17, 15, 31, 22]
 
