@@ -17,7 +17,7 @@ export class HistoricoPage {
   public hst = Array<Extrato>();
   private historicoSubscription: Subscription;
 
-  @ViewChild('mylist', { static: false }) mylist: IonList;
+  
 
   constructor(private nav: NavController,
     private toastController: ToastController,
@@ -29,9 +29,14 @@ export class HistoricoPage {
     setTimeout(() => {
       this.lineBarsCanvas = this.getChart(this.hst)
     }, 150)
+    console.log(screen.height)
+    console.log(screen.width)
+
   }
 
   slideoptions={
+    responsive: true,
+    maintainAspectRatio: false
     /*spaceBetween: 10,
     centeredSlides: true,
     //slidesPerView: 1.6,
@@ -103,7 +108,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        //data: [loup],
+        data: this.dados,//[loup],
         scanGaps: false
       }]
     }
@@ -111,10 +116,23 @@ export class HistoricoPage {
         d1[10] - d2[10],
         d1[11] - d2[11]]*/
     return new chartJs(ctx, {
+      height: 600,
       data,
-      type: "line"
+      type: "bar",
+      options: {
+        responsive: true,
+        layout: {
+            padding: {
+                left: 10,
+                right: 10,
+                top: 100,
+                bottom: 10
+            }
+        }
+    }
     })
   }
+
   esconde(){
     console.log(this.grafico)
     let mostra = !this.grafico
@@ -173,7 +191,6 @@ export class HistoricoPage {
         }
       ]
     });
-
     await alert.present();
   }
 
@@ -187,6 +204,7 @@ export class HistoricoPage {
     }
     this.listarHistorico()
   }
+
   async deletarHistory(id: string) {
     try {
       await this.historicoService.deleteHistory(id);
@@ -196,5 +214,4 @@ export class HistoricoPage {
     }
     this.listarHistorico()
   }
-
 }
