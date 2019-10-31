@@ -122,7 +122,7 @@ export class HistoricoPage {
       type: "bar",
       options: {
         responsive: true,
-        maintainAspectRatio: false,
+        maintainAspectRatio: false, 
         layout: {
             padding: {
                 left: 0,
