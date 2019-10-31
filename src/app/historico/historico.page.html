@@ -10,7 +10,17 @@
     </ion-label>
   </ion-toolbar>
 </ion-header>
-<ion-content>
+<ion-content padding>
+  <canvas id="line" height="150vh" width="100vw"></canvas>
+</ion-content>
+<!--<ion-grid style="background-color:blue" fixed >class="grids"
+  <ion-row style="background-color:red">
+    <ion-col >
+    </ion-col>
+  </ion-row>
+</ion-grid>
+
+width="400" height="100"
   <div class="campo">
     <p *ngIf="!hst.length" id="test">Nenhuma compra foi adicionada ainda</p>
     <ion-item-sliding *ngFor="let e of hst">
@@ -28,12 +38,4 @@
         <ion-item-option color="danger" (click)="deletarMovimentacao(e.id)">Deletar</ion-item-option>
       </ion-item-options>
     </ion-item-sliding>
-  </div>
-  <canvas id="line" height="150vh" width="100vw"></canvas>
-</ion-content>
-<!--<ion-grid style="background-color:blue" fixed >class="grids"
-  <ion-row style="background-color:red">
-    <ion-col >
-    </ion-col>
-  </ion-row>
-</ion-grid>-->
+  </div>-->

@@ -70,6 +70,7 @@ export class HistoricoPage {
     }
     console.log(loup)
     let ctx = document.getElementById("line")
+    
     let data = {
       labels: ["Janeiro", "Fevereiro", "Março", "Abril", "Maio", "Junho", "Julho", "Agosto", "Setembro", "Outubro", "Novembro", "Dezembro"],
       datasets: [{
@@ -116,16 +117,17 @@ export class HistoricoPage {
         d1[10] - d2[10],
         d1[11] - d2[11]]*/
     return new chartJs(ctx, {
-      height: 600,
+      height: "6000",
       data,
       type: "bar",
       options: {
         responsive: true,
+        maintainAspectRatio: false,
         layout: {
             padding: {
-                left: 10,
-                right: 10,
-                top: 100,
+                left: 0,
+                right: 30,
+                top: 30,
                 bottom: 10
             }
         }
@@ -145,12 +147,14 @@ export class HistoricoPage {
       document.getElementById("grafico").style.display = "none"
     }
   }
+
   //função para listar os dados da tabela de historico
   listarHistorico() {
     this.historicoSubscription = this.historicoService.getAll().subscribe(data => {
       this.hst = data
     })
   }
+
   //função para aparecer janela de confirmação
   async showToast(msg) {
     const toast = await this.toastController.create({
@@ -159,6 +163,7 @@ export class HistoricoPage {
     });
     toast.present();
   }
+
   //função para fechar a tela de historico
   histfechar() {
     clearInterval(this.loop);
