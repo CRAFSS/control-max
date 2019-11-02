@@ -42,8 +42,8 @@ export class AppComponent implements OnInit {
   ngOnInit() {
     setInterval(() => {
       this.Clock = Date.now();
-      this.trocademestest();
     }, 1000);
+    this.trocademestest();
   }
 
   initializeApp() {

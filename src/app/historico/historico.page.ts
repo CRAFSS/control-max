@@ -45,13 +45,12 @@ export class HistoricoPage {
       maxRatio: 5
     }*/
   }
-  private dados = [20, 45, 27, 18, 10, 38, 21, 45, 17, 55, 1, 52]
-  private dados2 = [30, 25, 27, 8, 20, 18, 1, 35, 17, 15, 31, 22]
+  private positivo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  private negativo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  private loup = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
 
   getChart(hst) {
-    let positivo = []
     let pstTotal = 0
-    let negativo = []
     let ngtTotal = 0
     let loup = 0
     for (let i = 0; i < this.hst.length; i++){
@@ -83,7 +82,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: this.dados,//[pstTotal],
+        data: this.positivo,//[pstTotal],
         scanGaps: false
       },
       {
@@ -96,7 +95,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: this.dados2,//[ngtTotal],
+        data: this.negativo,//[ngtTotal],
         scanGaps: false
       },
       {
@@ -109,7 +108,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: this.dados,//[loup],
+        data: this.loup,
         scanGaps: false
       }]
     }
@@ -126,7 +125,7 @@ export class HistoricoPage {
         layout: {
             padding: {
                 left: 0,
-                right: 30,
+                right: 40,
                 top: 30,
                 bottom: 10
             }

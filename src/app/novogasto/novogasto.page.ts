@@ -52,6 +52,8 @@ export class NovogastoPage implements OnInit {
         ],
       ]
     })
+    let teste = new Date().getMonth()
+    console.log(teste)
   }
 
   //função para fechar modal
@@ -62,7 +64,7 @@ export class NovogastoPage implements OnInit {
   // Código para adicionar novos gastos no Firebase
   addRegistro() {
     this.novoRegistro1.modificado = Date.now();
-
+    
     try {
       if (this.novoRegistro1.tipo == "g") {
         console.log("Credito")
