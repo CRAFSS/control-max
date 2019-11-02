@@ -5,7 +5,9 @@ import { SplashScreen } from '@ionic-native/splash-screen/ngx';
 import { StatusBar } from '@ionic-native/status-bar/ngx';
 import { Router } from '@angular/router';
 import { ModalPage } from './modal/modal.page';
-import { timer } from 'rxjs';
+import { timer, Subscription } from 'rxjs';
+import { ExtratoService } from './services/extrato.service';
+import { Extrato } from './models/extrato';
 
 
 @Component({
@@ -18,12 +20,23 @@ export class AppComponent implements OnInit {
   Clock = Date.now();
   inputValue: string;
   showSplash = true;
+  public extrato = new Array<Extrato>();
+  private extratoSubscripiton: Subscription;
 
-  constructor(private platform: Platform, private splashScreen: SplashScreen, private statusBar: StatusBar, private storage: Storage, private router: Router, private alertController: AlertController, private modal: ModalPage) {
+
+  constructor(private platform: Platform, 
+    private splashScreen: SplashScreen, 
+    private statusBar: StatusBar, 
+    private storage: Storage, 
+    private router: Router, 
+    private alertController: AlertController, 
+    private modal: ModalPage,
+    private extControl: ExtratoService) {
     this.initializeApp();
 
 
     this.platform.ready().then(() => {
+      this.trocademestest()
       this.storage.get('introShown').then((result) => {
         if (result) {
           this.router.navigateByUrl('home');
@@ -43,7 +56,7 @@ export class AppComponent implements OnInit {
     setInterval(() => {
       this.Clock = Date.now();
     }, 1000);
-    this.trocademestest();
+    //this.trocademestest();
   }
 
   initializeApp() {
@@ -66,12 +79,21 @@ export class AppComponent implements OnInit {
     await alert.present();
   }
 
+  pegaTudo() {
+    this.extratoSubscripiton = this.extControl.getAll().subscribe(data => {
+      this.extrato = data;
+    })
+  }
+
   trocademestest() {
     this.inputValue = (<HTMLInputElement>document.getElementById("mes")).value;
     //console.log(this.inputValue);
     if (this.inputValue == "01") {
       this.presentAlert();
-      this.storage.set("meus-registros", []);
+      for (let i = 0; i < this.extrato.length; i++){
+
+      }
+      //this.storage.set("meus-registros", []);
     }
   }
 }

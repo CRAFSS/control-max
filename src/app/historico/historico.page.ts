@@ -45,29 +45,35 @@ export class HistoricoPage {
       maxRatio: 5
     }*/
   }
-  private positivo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  private negativo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-  private loup = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-
+  
   getChart(hst) {
+    let positivo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    let negativo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    let loup = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     let pstTotal = 0
     let ngtTotal = 0
-    let loup = 0
+    //let index = 0
     for (let i = 0; i < this.hst.length; i++){
       if (this.hst[i].credito){
-        pstTotal += +this.hst[i].valor
+        console.log("Vamos querer")
+        positivo[this.hst[i].mes] += Number(this.hst[i].valor.toFixed(2))
       }else{
-        ngtTotal += +this.hst[i].valor
+        negativo[this.hst[i].mes] += Number(this.hst[i].valor.toFixed(2))
       }
+    }
+    for(let i = 0; i < loup.length; i++){
+      loup[i] = Number(positivo[i].toFixed(2)) - Number(negativo[i].toFixed(2))
     } 
-    let cor: string
+    console.log(positivo)
+    console.log(negativo)
+    /*let cor: string
     loup = pstTotal - ngtTotal
     if (loup >= 0){
       cor = "rgba(0, 178, 255, 0.8)"
     }else{
       cor = "rgba(255, 0, 0, 0.8)"
     }
-    console.log(loup)
+    console.log(loup)*/
     let ctx = document.getElementById("line")
     
     let data = {
@@ -82,7 +88,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: this.positivo,//[pstTotal],
+        data: positivo,//[pstTotal],
         scanGaps: false
       },
       {
@@ -95,20 +101,20 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: this.negativo,//[ngtTotal],
+        data: negativo,//[ngtTotal],
         scanGaps: false
       },
       {
         label: "Saldo",
         fill: false,
         lineTension: 0.,
-        backgroundColor: cor,
-        borderColor: "rgba(255, 0, 0, 0.8",
+        backgroundColor: "rgba(0, 255, 0, 0.8)",
+        borderColor: "rgba(255, 0, 0, 0.8)",
         borderCapStyle: 'butt',
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: this.loup,
+        data: loup,
         scanGaps: false
       }]
     }

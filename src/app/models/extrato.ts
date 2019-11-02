@@ -6,4 +6,5 @@ export interface Extrato {
     credito?: boolean;
     debito?: boolean;
     id?: any
+    mes?: number
 }
