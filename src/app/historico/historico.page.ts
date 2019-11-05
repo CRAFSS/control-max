@@ -167,7 +167,7 @@ export class HistoricoPage {
     this.historicoSubscription = this.teste.getAllMouth().subscribe(data => {
       this.hst = data
     })
-    console.log(this.hst)
+    console.log(`Esse é o objeto de estudo ${this.hst}`)
   }
 
 
