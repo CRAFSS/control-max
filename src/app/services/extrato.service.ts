@@ -28,6 +28,22 @@ export class ExtratoService {
       })
     )
   }
+  getAllMouth() {
+    let ano = new Date().getFullYear()
+    let mesNumero = new Date().getMonth()
+    
+    this.userId = this.authService.getAuth().currentUser.uid
+    let extColections = this.db.collection<Extrato>(this.userId)   
+    return extColections.snapshotChanges().pipe(
+      map(action => {
+        return action.map(a => {
+          const data = a.payload.doc.data()
+          const id = a.payload.doc.id;
+          return { id, ...data }
+        })
+      })
+    )
+  }
 
   //função para adicionar movimentações do usuário
   addMovimentacao(extrato: Extrato) {
@@ -43,10 +59,16 @@ export class ExtratoService {
   getUser() {
     let ano = new Date().getFullYear()
     let mesNumero = new Date().getMonth()
+    
+    this.userId = this.authService.getAuth().currentUser.uid
+    this.extColections = this.db.collection<Extrato>(this.userId).doc(`Extrato-${ano}`).collection<Extrato>(this.determinaMes(mesNumero))
+  }
+
+  public determinaMes(mesNumero){
     let mes: string;
     switch (mesNumero) {
       case 0:
-        mes = "Janeiro"
+        mes = "Janeiro";
         break
       case 1:
         mes = "Fevereiro"
@@ -82,7 +104,6 @@ export class ExtratoService {
         mes = "Dezembro"
         break
     }
-    this.userId = this.authService.getAuth().currentUser.uid
-    this.extColections = this.db.collection<Extrato>(this.userId).doc(ano.toString()).collection<Extrato>(mes)
+    return mes;
   }
 }

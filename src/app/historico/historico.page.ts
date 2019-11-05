@@ -4,6 +4,7 @@ import { Extrato } from '../models/extrato';
 import { Subscription } from 'rxjs';
 import { HistoricoService } from '../services/historico.service';
 import  chartJs  from 'chart.js';
+import { ExtratoService } from '../services/extrato.service';
 
 @Component({
   selector: 'app-historico',
@@ -22,7 +23,8 @@ export class HistoricoPage {
   constructor(private nav: NavController,
     private toastController: ToastController,
     private alertController: AlertController,
-    private historicoService: HistoricoService) { }
+    private historicoService: HistoricoService,
+    private teste: ExtratoService) { }
 
   ngOnInit() {
     this.listarHistorico();
@@ -155,10 +157,19 @@ export class HistoricoPage {
 
   //função para listar os dados da tabela de historico
   listarHistorico() {
-    this.historicoSubscription = this.historicoService.getAll().subscribe(data => {
+    /*this.historicoSubscription = this.teste.getAll().subscribe(data => {
+      this.hst = data
+      console.log(`Estou Aqui: ${this.hst}`)
+    })/*
+    /*this.historicoSubscription = this.historicoService.getAll().subscribe(data => {
+      this.hst = data
+    })*/
+    this.historicoSubscription = this.teste.getAllMouth().subscribe(data => {
       this.hst = data
     })
+    console.log(this.hst)
   }
+
 
   //função para aparecer janela de confirmação
   async showToast(msg) {

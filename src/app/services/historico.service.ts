@@ -3,6 +3,7 @@ import { Extrato } from '../models/extrato';
 import { AngularFirestore, AngularFirestoreCollection } from "@angular/fire/firestore";
 import { map } from "rxjs/operators";
 import { AuthService } from './auth.service';
+import { ExtratoService } from './extrato.service';
 
 @Injectable({
   providedIn: 'root'
@@ -12,7 +13,7 @@ export class HistoricoService {
   private hstCollections: AngularFirestoreCollection<Extrato>
   private userId: string
 
-  constructor(private db: AngularFirestore, private authService: AuthService) {
+  constructor(private db: AngularFirestore, private authService: AuthService, private extratoService: ExtratoService) {
 
 
   }
@@ -36,8 +37,11 @@ export class HistoricoService {
   }
   //Função para pegar o id do usuário
   getUser() {
+    let ano = new Date().getFullYear()
+    let mesNumero = 11
     this.userId = this.authService.getAuth().currentUser.uid
-    this.hstCollections = this.db.collection<Extrato>("Historico" + this.userId)
+    //this.hstCollections = this.db.collection<Extrato>("Historico" + this.userId)
+    this.hstCollections = this.db.collection<Extrato>(this.userId).doc(`Historico-${ano}`).collection<Extrato>(this.extratoService.determinaMes(mesNumero))
   }
 
   deleteHistory(id: string) {
