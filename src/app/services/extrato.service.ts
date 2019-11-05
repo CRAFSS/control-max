@@ -42,6 +42,6 @@ export class ExtratoService {
   //Função para pegar o id do usuário e criar, caso não exista, uma nova coleção no banco de dados
   getUser() {
     this.userId = this.authService.getAuth().currentUser.uid
-    this.extColections = this.db.collection<Extrato>("Extrato" + this.userId)
+    this.extColections = this.db.collection<Extrato>("Extrato" + this.userId).doc("2019").collection<Extrato>("Vamos_testar_essa_vagina")
   }
 }
