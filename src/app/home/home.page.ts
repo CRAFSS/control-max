@@ -25,9 +25,9 @@ export class HomePage {
   constructor(public modalController: ModalController,
     private extratoService: ExtratoService,
     public appComp: AppComponent) {
-      console.log(this.extrato)
-      this.pegaTudo()
-    }
+    console.log(this.extrato)
+    this.pegaTudo()
+  }
 
   //formatar número inteiro para moeda
   formatter = new Intl.NumberFormat('pt-BR', {
@@ -45,18 +45,26 @@ export class HomePage {
 
   trocademestest() {
     this.valueDate = this.appComp.inputValue
-    //console.log(this.extrato);
-    if (this.valueDate == "01") {
-      //console.log(this.extrato.length)
-      try {
-        for (let i = 0; i < this.extrato.length; i++) {
-          //alert("Cheguei aqui!!!" + i)
-          this.deletarMouth(this.extrato[i].id)
+    //console.log(this.extrato[0].mes);//new Date().getMonth()
+    console.log("Vamos escrever")
+    let data = this.extrato.length != 0 ? true : false
+    console.log("Vamos escrever" + data)
+    if (data) {
+      console.log("Essa é a data do banco: "+this.extrato[0].mes)
+      console.log("Essa é a data de hoje: "+new Date().getMonth())
+      console.log(this.extrato[0].mes != new Date().getMonth())
+      if (this.extrato[0].mes != new Date().getMonth()){
+        console.log("Cheguei aqui")
+        try {
+          for (let i = 0; i < this.extrato.length; i++) {
+            //alert("Cheguei aqui!!!" + i)
+            this.deletarMouth(this.extrato[i].id)
+          }
+        } catch (erro) {
+          this.appComp.presentAlert(erro)
         }
-      } catch (erro) {
-        this.appComp.presentAlert(erro)
+        this.appComp.presentAlert('Um novo mês começou! seu gerenciador de compras foi zerado. Você pode consultar sua compras antigas no historico')
       }
-      this.appComp.presentAlert('Um novo mês começou! seu gerenciador de compras foi zerado. Você pode consultar sua compras antigas no historico')
     }
   }
 
@@ -65,7 +73,7 @@ export class HomePage {
       await this.extratoService.deleteMovimentacao(id)
     } catch (erro) {
       this.appComp.presentAlert(erro)
-    } 
+    }
   }
 
   //função para mostrar o total na home

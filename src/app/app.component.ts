@@ -78,7 +78,7 @@ export class AppComponent implements OnInit {
   trocademestest(extrato) {
     this.inputValue = (<HTMLInputElement>document.getElementById("mes")).value;
     console.log(this.inputValue);
-    if (this.inputValue == "01") {
+    if (this.extrato[0].mes != new Date().getMonth()) {
       console.log(extrato.length)
       try{
         for (let i = 0; i < extrato.length; i++){

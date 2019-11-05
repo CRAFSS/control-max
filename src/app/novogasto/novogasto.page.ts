@@ -64,8 +64,8 @@ export class NovogastoPage implements OnInit {
   // Código para adicionar novos gastos no Firebase
   addRegistro() {
     this.novoRegistro1.modificado = Date.now();
-    //this.novoRegistro1.mes = new Date().getMonth()
-    this.novoRegistro1.mes = 4
+    this.novoRegistro1.mes = new Date().getMonth()
+    //this.novoRegistro1.mes = 5
     console.log(this.novoRegistro1.mes)
     try {
       if (this.novoRegistro1.tipo == "g") {
