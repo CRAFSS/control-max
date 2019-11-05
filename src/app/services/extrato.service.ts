@@ -39,7 +39,7 @@ export class ExtratoService {
   deleteMovimentacao(id: string) {
     return this.extColections.doc(id).delete();
   }
-  //Função para pegar o id do usuário
+  //Função para pegar o id do usuário e criar, caso não exista, uma nova coleção no banco de dados
   getUser() {
     this.userId = this.authService.getAuth().currentUser.uid
     this.extColections = this.db.collection<Extrato>("Extrato" + this.userId)

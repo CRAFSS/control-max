@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { ModalController } from '@ionic/angular';
+import { ModalController, Platform } from '@ionic/angular';
 import { ModalPage } from '../modal/modal.page';
 import { animacaoEntrada } from '../testeAnimacao/entrar';
 import { anicacaoSaida } from '../testeAnimacao/sair';
@@ -7,6 +7,7 @@ import { NovogastoPage } from '../novogasto/novogasto.page';
 import { ExtratoService } from '../services/extrato.service';
 import { Extrato } from '../models/extrato';
 import { Subscription } from 'rxjs';
+import { AppComponent } from '../app.component';
 
 @Component({
   selector: 'app-home',
@@ -19,11 +20,14 @@ export class HomePage {
   public totalString: String
   public extrato = new Array<Extrato>();
   private extratoSubscripiton: Subscription;
+  private valueDate: String;
 
   constructor(public modalController: ModalController,
-    private extratoService: ExtratoService) {
-    this.pegaTudo()
-  }
+    private extratoService: ExtratoService,
+    public appComp: AppComponent) {
+      console.log(this.extrato)
+      this.pegaTudo()
+    }
 
   //formatar número inteiro para moeda
   formatter = new Intl.NumberFormat('pt-BR', {
@@ -39,6 +43,30 @@ export class HomePage {
     hammertime.get('swipe').set({ direction: Hammer.DIRECTION_ALL });
   }
 
+  trocademestest() {
+    this.valueDate = this.appComp.inputValue
+    //console.log(this.extrato);
+    if (this.valueDate == "01") {
+      //console.log(this.extrato.length)
+      try {
+        for (let i = 0; i < this.extrato.length; i++) {
+          //alert("Cheguei aqui!!!" + i)
+          this.deletarMouth(this.extrato[i].id)
+        }
+      } catch (erro) {
+        this.appComp.presentAlert(erro)
+      }
+      this.appComp.presentAlert('Um novo mês começou! seu gerenciador de compras foi zerado. Você pode consultar sua compras antigas no historico')
+    }
+  }
+
+  async deletarMouth(id: string) {
+    try {
+      await this.extratoService.deleteMovimentacao(id)
+    } catch (erro) {
+      this.appComp.presentAlert(erro)
+    } 
+  }
 
   //função para mostrar o total na home
   pegaTudo() {
@@ -52,14 +80,16 @@ export class HomePage {
           this.total -= this.extrato[i].valor;
         }
       }
+      console.log(this.extrato)
       let conv = this.total
       this.totalString = (this.formatter.format(conv))
-      console.log(this.total)
-      if (this.total >= 0){
+      //console.log(this.total)
+      if (this.total >= 0) {
         document.getElementById("saldo").style.color = "blue"
-      }else{
+      } else {
         document.getElementById("saldo").style.color = "red"
       }
+      this.trocademestest()
     })
   }
 
@@ -82,6 +112,7 @@ export class HomePage {
     return await modal.present();
   }
 
+  //Função para fechar o modal
   fechar() {
     this.modalController.dismiss();
   }

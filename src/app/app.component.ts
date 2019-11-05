@@ -18,7 +18,7 @@ import { Extrato } from './models/extrato';
 export class AppComponent implements OnInit {
 
   Clock = Date.now();
-  inputValue: string;
+  public inputValue: string;
   showSplash = true;
   public extrato = new Array<Extrato>();
   private extratoSubscripiton: Subscription;
@@ -33,10 +33,9 @@ export class AppComponent implements OnInit {
     private modal: ModalPage,
     private extControl: ExtratoService) {
     this.initializeApp();
-
-
+    
     this.platform.ready().then(() => {
-      this.trocademestest()
+      this.inputValue = (<HTMLInputElement>document.getElementById("mes")).value;
       this.storage.get('introShown').then((result) => {
         if (result) {
           this.router.navigateByUrl('home');
@@ -50,13 +49,10 @@ export class AppComponent implements OnInit {
     });
   }
 
-
-
   ngOnInit() {
     setInterval(() => {
       this.Clock = Date.now();
     }, 1000);
-    //this.trocademestest();
   }
 
   initializeApp() {
@@ -69,31 +65,32 @@ export class AppComponent implements OnInit {
 
   }
 
-  async presentAlert() {
+  async presentAlert(msg) {
     const alert = await this.alertController.create({
       header: 'Novo Mês!',
-      message: 'Um novo mês começou! seu gerenciador de compras foi zerado. Você pode consultar sua compras antigas no historico',
+      message: msg,
       buttons: ['OK']
     });
 
     await alert.present();
   }
 
-  pegaTudo() {
-    this.extratoSubscripiton = this.extControl.getAll().subscribe(data => {
-      this.extrato = data;
-    })
-  }
-
-  trocademestest() {
+  trocademestest(extrato) {
     this.inputValue = (<HTMLInputElement>document.getElementById("mes")).value;
-    //console.log(this.inputValue);
+    console.log(this.inputValue);
     if (this.inputValue == "01") {
-      this.presentAlert();
-      for (let i = 0; i < this.extrato.length; i++){
-
+      console.log(extrato.length)
+      try{
+        for (let i = 0; i < extrato.length; i++){
+          alert("Cheguei aqui!!!"+i)
+          //this.deletarMouth(this.extrato[i].id)
+        }
+        this.presentAlert('Um novo mês começou! seu gerenciador de compras foi zerado. Você pode consultar sua compras antigas no historico')
+      } catch(erro){
+        this.presentAlert(erro)
       }
-      //this.storage.set("meus-registros", []);
     }
   }
+
+
 }
