@@ -48,26 +48,27 @@ export class HistoricoPage {
     }*/
   }
   
+  private positivo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  private negativo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  private loup = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+  
   getChart(hst) {
-    let positivo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    let negativo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
-    let loup = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
     let pstTotal = 0
     let ngtTotal = 0
     //let index = 0
-    for (let i = 0; i < this.hst.length; i++){
+    /*for (let i = 0; i < this.hst.length; i++){
       if (this.hst[i].credito){
         console.log("Vamos querer")
         positivo[this.hst[i].mes] += Number(this.hst[i].valor.toFixed(2))
       }else{
         negativo[this.hst[i].mes] += Number(this.hst[i].valor.toFixed(2))
       }
+    }*/
+    for(let i = 0; i < this.loup.length; i++){
+      this.loup[i] = Number(this.positivo[i].toFixed(2)) - Number(this.negativo[i].toFixed(2))
     }
-    for(let i = 0; i < loup.length; i++){
-      loup[i] = Number(positivo[i].toFixed(2)) - Number(negativo[i].toFixed(2))
-    } 
-    console.log(positivo)
-    console.log(negativo)
+    console.log(this.positivo)
+    console.log(this.negativo)
     /*let cor: string
     loup = pstTotal - ngtTotal
     if (loup >= 0){
@@ -90,7 +91,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: positivo,//[pstTotal],
+        data: this.positivo,//[pstTotal],
         scanGaps: false
       },
       {
@@ -103,7 +104,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: negativo,//[ngtTotal],
+        data: this.negativo,//[ngtTotal],
         scanGaps: false
       },
       {
@@ -116,7 +117,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: loup,
+        data: this.loup,
         scanGaps: false
       }]
     }
@@ -160,14 +161,35 @@ export class HistoricoPage {
     /*this.historicoSubscription = this.teste.getAll().subscribe(data => {
       this.hst = data
       console.log(`Estou Aqui: ${this.hst}`)
-    })/*
+    })*/
     /*this.historicoSubscription = this.historicoService.getAll().subscribe(data => {
       this.hst = data
     })*/
-    this.historicoSubscription = this.teste.getAllMouth().subscribe(data => {
+    /*this.historicoSubscription = this.teste.getAllMouth(10).subscribe(data => {
       this.hst = data
-    })
-    console.log(`Esse é o objeto de estudo ${this.hst}`)
+      console.log(`Esse é o objeto de estudo Novembro ${this.hst.length}`)
+    })*/
+    for(let i = 0; i < 12; i++){
+      console.log(i)
+      this.historicoSubscription = this.teste.getAllMouth(i).subscribe(data => {
+        //console.log(i)
+        this.hst = data
+        //console.log(`Esse é o objeto de estudo ${i} ${this.hst.length}`)
+        if (this.hst.length != 0){
+          console.log(this.teste.determinaMes(i))
+          for(let j = 0; j < this.hst.length; j++){
+            console.log(`O valor desse mês é: ${this.hst[j].valor}`)
+            if (this.hst[j].credito){
+              this.positivo[i] += this.hst[j].valor
+            }else {
+              this.negativo[i] += this.hst[j].valor
+            }
+          }
+        }
+      })
+    }
+    console.log(this.positivo)
+    console.log(this.negativo)
   }
 
 

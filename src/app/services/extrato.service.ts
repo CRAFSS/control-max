@@ -28,12 +28,14 @@ export class ExtratoService {
       })
     )
   }
-  getAllMouth() {
+  getAllMouth(mesNumero) {
     let ano = new Date().getFullYear()
-    let mesNumero = new Date().getMonth()
+    //let mesNumero = 2
     
     this.userId = this.authService.getAuth().currentUser.uid
-    let extColections = this.db.collection<Extrato>(this.userId)   
+    let extColections = this.db.collection<Extrato>(this.userId).doc(`Extrato-${ano}`).collection<Extrato>(this.determinaMes(mesNumero))   
+    //let extColections = this.db.collection<Extrato>(this.userId)   
+       
     return extColections.snapshotChanges().pipe(
       map(action => {
         return action.map(a => {
@@ -55,6 +57,7 @@ export class ExtratoService {
   deleteMovimentacao(id: string) {
     return this.extColections.doc(id).delete();
   }
+
   //Função para pegar o id do usuário e criar, caso não exista, uma nova coleção no banco de dados
   getUser() {
     let ano = new Date().getFullYear()
