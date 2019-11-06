@@ -29,7 +29,7 @@ export class HistoricoPage {
   ngOnInit() {
     this.listarHistorico();
     setTimeout(() => {
-      this.lineBarsCanvas = this.getChart(this.hst)
+      this.lineBarsCanvas = this.getChart()
     }, 150)
     console.log(screen.height)
     console.log(screen.width)
@@ -52,9 +52,8 @@ export class HistoricoPage {
   private negativo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   private loup = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
   
-  getChart(hst) {
-    let pstTotal = 0
-    let ngtTotal = 0
+  getChart() {
+
     //let index = 0
     /*for (let i = 0; i < this.hst.length; i++){
       if (this.hst[i].credito){
