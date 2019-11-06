@@ -54,28 +54,12 @@ export class HistoricoPage {
   
   getChart() {
 
-    //let index = 0
-    /*for (let i = 0; i < this.hst.length; i++){
-      if (this.hst[i].credito){
-        console.log("Vamos querer")
-        positivo[this.hst[i].mes] += Number(this.hst[i].valor.toFixed(2))
-      }else{
-        negativo[this.hst[i].mes] += Number(this.hst[i].valor.toFixed(2))
-      }
-    }*/
     for(let i = 0; i < this.loup.length; i++){
       this.loup[i] = Number(this.positivo[i].toFixed(2)) - Number(this.negativo[i].toFixed(2))
     }
     console.log(this.positivo)
     console.log(this.negativo)
-    /*let cor: string
-    loup = pstTotal - ngtTotal
-    if (loup >= 0){
-      cor = "rgba(0, 178, 255, 0.8)"
-    }else{
-      cor = "rgba(255, 0, 0, 0.8)"
-    }
-    console.log(loup)*/
+
     let ctx = document.getElementById("line")
     
     let data = {
@@ -90,7 +74,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: this.positivo,//[pstTotal],
+        data: this.positivo,
         scanGaps: false
       },
       {
@@ -103,7 +87,7 @@ export class HistoricoPage {
         borderJoinStyle: 'miter',
         pointRadius: 1,
         pointHitRadius: 10,
-        data: this.negativo,//[ngtTotal],
+        data: this.negativo,
         scanGaps: false
       },
       {
@@ -120,9 +104,7 @@ export class HistoricoPage {
         scanGaps: false
       }]
     }
-    /*[d1[0] - d2[0], d1[1] - d2[1], d1[2] - d2[2], d1[3] - d2[3], d1[4] - d2[4], d1[5] - d2[5], d1[6] - d2[6], d1[7] - d2[7], d1[8] - d2[8], d1[9] - d2[9],
-        d1[10] - d2[10],
-        d1[11] - d2[11]]*/
+
     return new chartJs(ctx, {
       height: "6000",
       data,
@@ -157,23 +139,13 @@ export class HistoricoPage {
 
   //função para listar os dados da tabela de historico
   listarHistorico() {
-    /*this.historicoSubscription = this.teste.getAll().subscribe(data => {
-      this.hst = data
-      console.log(`Estou Aqui: ${this.hst}`)
-    })*/
-    /*this.historicoSubscription = this.historicoService.getAll().subscribe(data => {
-      this.hst = data
-    })*/
-    /*this.historicoSubscription = this.teste.getAllMouth(10).subscribe(data => {
-      this.hst = data
-      console.log(`Esse é o objeto de estudo Novembro ${this.hst.length}`)
-    })*/
+
     for(let i = 0; i < 12; i++){
       console.log(i)
       this.historicoSubscription = this.teste.getAllMouth(i).subscribe(data => {
-        //console.log(i)
+
         this.hst = data
-        //console.log(`Esse é o objeto de estudo ${i} ${this.hst.length}`)
+
         if (this.hst.length != 0){
           console.log(this.teste.determinaMes(i))
           for(let j = 0; j < this.hst.length; j++){
