@@ -39,7 +39,7 @@ export class HistoricoPage {
     this.listarHistorico();
     setTimeout(() => {
       this.lineBarsCanvas = this.getChart()
-    }, 150)
+    }, 500)
   }
 
   slideoptions={
