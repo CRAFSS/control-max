@@ -65,7 +65,7 @@ export class NovogastoPage implements OnInit {
   addRegistro() {
     this.novoRegistro1.modificado = Date.now();
     this.novoRegistro1.mes = new Date().getMonth()
-    //this.novoRegistro1.mes = 5
+    //this.novoRegistro1.mes = 9
     console.log(this.novoRegistro1.mes)
     try {
       if (this.novoRegistro1.tipo == "g") {

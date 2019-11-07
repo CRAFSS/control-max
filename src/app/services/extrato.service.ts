@@ -62,6 +62,7 @@ export class ExtratoService {
   getUser() {
     let ano = new Date().getFullYear()
     let mesNumero = new Date().getMonth()
+    //let mesNumero = 9
     
     this.userId = this.authService.getAuth().currentUser.uid
     this.extColections = this.db.collection<Extrato>(this.userId).doc(`Extrato-${ano}`).collection<Extrato>(this.determinaMes(mesNumero))

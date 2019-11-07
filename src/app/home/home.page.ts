@@ -97,7 +97,7 @@ export class HomePage {
       } else {
         document.getElementById("saldo").style.color = "red"
       }
-      this.trocademestest()
+      //this.trocademestest()
     })
   }
 

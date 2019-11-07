@@ -27,13 +27,19 @@ export class HistoricoPage {
     private teste: ExtratoService) { }
 
   ngOnInit() {
+    /*this.listarHistorico();
+    setTimeout(() => {
+      this.lineBarsCanvas = this.getChart()
+    }, 150)*/
+    console.log(screen.height)
+    console.log(screen.width)
+
+  }
+  ionViewDidEnter(){
     this.listarHistorico();
     setTimeout(() => {
       this.lineBarsCanvas = this.getChart()
     }, 150)
-    console.log(screen.height)
-    console.log(screen.width)
-
   }
 
   slideoptions={
@@ -56,6 +62,7 @@ export class HistoricoPage {
 
     for(let i = 0; i < this.loup.length; i++){
       this.loup[i] = Number(this.positivo[i].toFixed(2)) - Number(this.negativo[i].toFixed(2))
+      this.loup[i] = Number(this.loup[i].toFixed(2))
     }
     console.log(this.positivo)
     console.log(this.negativo)
