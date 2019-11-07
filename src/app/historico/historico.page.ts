@@ -1,5 +1,5 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-import { IonList, ToastController, AlertController, Platform, NavController } from '@ionic/angular';
+import { Component } from '@angular/core';
+import { ToastController, AlertController, NavController } from '@ionic/angular';
 import { Extrato } from '../models/extrato';
 import { Subscription } from 'rxjs';
 import { HistoricoService } from '../services/historico.service';
