@@ -1,0 +1,78 @@
+.letra{
+    position: fixed;
+    width: 25%;
+    top:7%;
+    left:44%;
+    z-index: 3;
+}
+
+.close{
+    font-size: 20px;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    height: 50%;
+    transform: translate(-50%, -50%);
+    display: block;
+    z-index: 3;
+}
+
+.icon{
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    z-index: 3;
+    top: 5%;
+    border:none;
+    background: white;
+    left: 87%;
+}
+
+#test{
+    padding: 10%;
+    margin-left:8%;
+    margin-top:40%;
+    display: block;
+}
+
+.lixeira{
+    position: fixed;
+    width: 45px;
+    height: 45px;
+    z-index: 3;
+    top: 5%;
+    border:none;
+    background: white;
+    left: 5%;
+}
+
+.campo{
+    height: 90%;
+    margin-top:20%;
+    z-index: 0;
+}
+
+.money{
+    color: black;
+}
+
+.clear{
+    position: fixed;
+    width: 100%;
+    height: 15%;
+    background: rgba(255, 255, 255, 0.3);
+    z-index: 2;
+    backdrop-filter: blur(10px);  
+    -webkit-backdrop-filter: blur(10px);
+}
+
+@media (min-width: 650px){
+    .campo{
+        margin-top: 5%;
+    }
+    
+    #test{
+        margin-left: 28%;
+        margin-top: 8%;
+    }
+}

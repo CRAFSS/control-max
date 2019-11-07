@@ -1,0 +1,131 @@
+ion-toolbar,
+ion-content {
+    --background: #993399; 
+ }
+
+ ion-title{
+     color:white;
+ }
+
+ .iontes{
+     background: white;
+     width: 80%;
+     height: 55%!important;
+     border-radius: 5%;
+     margin-top: 20%;
+     margin-left: auto;
+     margin-right: auto;
+     -webkit-box-shadow: 0px 0px 21px 4px rgba(0,0,0,0.54);
+     -moz-box-shadow: 0px 0px 21px 4px rgba(0,0,0,0.54);
+     box-shadow: 0px 0px 21px 4px rgba(0,0,0,0.54);
+ }
+
+ 
+ .vicon{
+    position: absolute;
+    color: white !important;
+    bottom: 5%;
+    right: 5%;
+    border: none;
+    width: 30px;
+    height: 30px;
+    border: none;
+    background: rgba(0,0,0,0)
+ }
+
+ .icon{
+    width: 80%;
+    height: 80%;
+    display: block;
+    margin-left: 23%;
+    margin-top: 23%;
+ }
+ 
+ .baddd{
+    position: absolute;
+    width: 12%;
+    height: 8%;
+    border: none;
+    margin-left:44% !important;
+    margin-top: 20%;
+    background: rgba(0,0,0,0)
+ }
+
+ .badd{
+    color: white;
+    width: 80%;
+    height: 80%;
+    margin: 10% 10% 10% 10%;
+ }
+ 
+ .gasto{
+     width: 50%;
+     height: 10%;
+     padding-top: 45%;
+     margin-bottom: 45%;
+     margin-left: 25%;
+     margin-top: 25%;
+     font-size: 1.5rem;
+ }
+
+ .baixo{
+    color:var(--ion-color-step-600,#666);
+    font-size: 14px;
+    line-height: 20px;
+    text-overflow: inherit;
+    overflow: inherit;
+    margin-left: 0%;
+    text-align:center;
+    width: 100%;
+    margin-bottom:1px !important;
+}
+
+.header-ios ion-toolbar:last-child {
+    --border-width: 0 0 0.55px;
+    --border-color:#993399;
+}
+@media (max-width: 365px) {
+    .gasto{
+        font-size: 1.1rem
+    }
+}
+
+
+@media (min-width: 400px) {
+    .iontes{
+        height: 60%;
+    }
+}
+
+@media (min-width: 650px){
+    .iontes{
+        height: 800px;
+        width: 700px;
+        margin-top:5%;
+    }
+    .baddd{
+        margin-left:50%;
+    }
+
+    .gasto{
+        padding-top: 21%;
+        margin-left: 35%;
+        margin-bottom: 23%;
+        margin-top: 15%;
+    }
+
+    .baddd{
+        margin-top: 7%;
+    }
+}
+
+@media (min-width: 1000px){
+    .baddd{
+        margin-top: 3%;
+    }
+    
+    .badd{
+        width: 60px;
+        height: 60px;
+    }
+}
