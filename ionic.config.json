@@ -1,7 +1,0 @@
-{
-  "name": "controle",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "angular"
-}

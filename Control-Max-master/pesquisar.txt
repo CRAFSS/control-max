@@ -1,3 +1,0 @@
-https://ionicframework.com/docs/api/slides
-
-https://angularfirebase.com/lessons/ionic4-intro-slides-tutorial-to-educate-app-users/

@@ -1,2 +1,0 @@
-# Control-Max
- projeto ionic
