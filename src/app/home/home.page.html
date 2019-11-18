@@ -1,21 +1,21 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-title text-center>
-      Despesas
+      Saldo do mês {{mes}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
 
 <ion-content>
-  
-  <div (click)="presentModal()"  class="iontes" >
-    <p class="gasto"><span id = "saldo">{{totalString}}</span> Gasto</p>
-    <p class="baixo">R$2.000,00 Disponível</p>
+
+  <div (click)="presentModal()" class="iontes">
+    <p class="gasto"><span id="saldo">{{totalString}}</span> Gasto</p>
+    <!--<p class="baixo">R$2.000,00 Disponível</p>-->
   </div>
   <button class="vicon" routerLink="/settings">
     <ion-icon class="icon" name="settings"></ion-icon>
   </button>
-  <button class="baddd" (click)="novog()" >
+  <button class="baddd" (click)="novog()">
     <ion-icon class="badd" name="add-circle-outline"></ion-icon>
   </button>
 </ion-content>

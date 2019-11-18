@@ -21,13 +21,14 @@ export class HomePage {
   public extrato = new Array<Extrato>();
   private extratoSubscripiton: Subscription;
   private valueDate: String;
-
+  public mes: String = this.extratoService.determinaMes(new Date().getMonth())
+  
   constructor(public modalController: ModalController,
-    private extratoService: ExtratoService,
+    public extratoService: ExtratoService,
     public appComp: AppComponent) {
-    console.log(this.extrato)
-    this.pegaTudo()
-  }
+      console.log(this.extrato)
+      this.pegaTudo()
+    }
 
   //formatar número inteiro para moeda
   formatter = new Intl.NumberFormat('pt-BR', {

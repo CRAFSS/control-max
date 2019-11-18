@@ -59,16 +59,22 @@ export class ExtratoService {
   }
 
   //Função para pegar o id do usuário e criar, caso não exista, uma nova coleção no banco de dados
-  getUser() {
+  getUser(mes?) {
     let ano = new Date().getFullYear()
-    let mesNumero = new Date().getMonth()
-    //let mesNumero = 9
+    let mesNumero;
+    if (mes){
+      console.log(mes)
+    }else {
+      mesNumero = new Date().getMonth()
+    }
+
     
     this.userId = this.authService.getAuth().currentUser.uid
     this.extColections = this.db.collection<Extrato>(this.userId).doc(`Extrato-${ano}`).collection<Extrato>(this.determinaMes(mesNumero))
   }
 
   public determinaMes(mesNumero){
+    mesNumero = Number(mesNumero)
     let mes: string;
     switch (mesNumero) {
       case 0:

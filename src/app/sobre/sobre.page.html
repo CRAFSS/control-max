@@ -9,6 +9,25 @@
 
 <ion-content (swiperight)="fechar()">
   <h5>ControlMax</h5>
-  <p>O ControlMax te ajuda a manter controle sombre suas finanças, de forma simple e fácil, e totalmente de graça. 
-    Esse aplicativo foi desenvolvido por motivos educacionais, sem fins lucrativos (pelo menos ainda).</p>
+  <p>Vocês já conhecem a 8 maravilha do mundo, o App que irá te ajudar a cuidar de suas contas mensais... 
+    CONTROL MAX, com ele você nunca mais vai se perder nas contas.  
+    Baixe já é de graça
+  </p>
+  <ion-item>
+    <ion-label>Month</ion-label>
+    <ion-select placeholder="Troca de mês" (ionChange)="trocaAi($event)">
+      <ion-select-option value="0">January</ion-select-option>
+      <ion-select-option value="1">February</ion-select-option>
+      <ion-select-option value="2">March</ion-select-option>
+      <ion-select-option value="3">April</ion-select-option>
+      <ion-select-option value="4">May</ion-select-option>
+      <ion-select-option value="5">June</ion-select-option>
+      <ion-select-option value="6">July</ion-select-option>
+      <ion-select-option value="7">August</ion-select-option>
+      <ion-select-option value="8">September</ion-select-option>
+      <ion-select-option value="9">October</ion-select-option>
+      <ion-select-option value="10">November</ion-select-option>
+      <ion-select-option value="11">December</ion-select-option>
+    </ion-select>
+  </ion-item>
 </ion-content>
