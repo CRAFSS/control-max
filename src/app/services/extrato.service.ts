@@ -16,8 +16,8 @@ export class ExtratoService {
   constructor(private db: AngularFirestore, private authService: AuthService) { }
 
   //função para listar os dados do usuário
-  getAll() {
-    this.getUser()
+  getAll(mes?) {
+    this.getUser(mes)
     return this.extColections.snapshotChanges().pipe(
       map(action => {
         return action.map(a => {
@@ -63,11 +63,12 @@ export class ExtratoService {
     let ano = new Date().getFullYear()
     let mesNumero;
     if (mes){
-      console.log(mes)
+      mesNumero = mes
+      //console.log(mes)
     }else {
       mesNumero = new Date().getMonth()
     }
-
+    console.log(mesNumero)
     
     this.userId = this.authService.getAuth().currentUser.uid
     this.extColections = this.db.collection<Extrato>(this.userId).doc(`Extrato-${ano}`).collection<Extrato>(this.determinaMes(mesNumero))

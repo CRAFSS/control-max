@@ -30,12 +30,13 @@ export class ModalPage implements OnInit {
   }
 
   ngOnInit() {
-    this.listarRegistros();
+    //this.listarRegistros();
+    this.pegaTudo()
   }
 
   //função para listar as movimentações
-  pegaTudo() {
-    this.extratoSubscripiton = this.extratoService.getAll().subscribe(data => {
+  pegaTudo(mes?) {
+    this.extratoSubscripiton = this.extratoService.getAll(mes).subscribe(data => {
       this.extrato = data;
       this.total = 0;
       for (let i = 0; i < this.extrato.length; i++) {
@@ -53,13 +54,17 @@ export class ModalPage implements OnInit {
     })
   }
 
+  trocaAi(event){
+    console.log(event.target.value)
+    this.pegaTudo(event.target.value)
+  }
   //função para fechar o modal
   fechar() {
     clearInterval(this.parar)
     this.modalController.dismiss();
   }
 
-  async listarRegistros() {
+  async listarRegistros(mes?) {
     this.pegaTudo()
   }
 
