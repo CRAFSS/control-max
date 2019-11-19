@@ -27,10 +27,6 @@ export class HistoricoPage {
     private teste: ExtratoService) { }
 
   ngOnInit() {
-    /*this.listarHistorico();
-    setTimeout(() => {
-      this.lineBarsCanvas = this.getChart()
-    }, 150)*/
     console.log(screen.height)
     console.log(screen.width)
 
@@ -40,18 +36,6 @@ export class HistoricoPage {
     setTimeout(() => {
       this.lineBarsCanvas = this.getChart()
     }, 500)
-  }
-
-  slideoptions={
-    responsive: true,
-    maintainAspectRatio: false
-    /*spaceBetween: 10,
-    centeredSlides: true,
-    //slidesPerView: 1.6,
-    //autoHeight: true,
-    zoom:{
-      maxRatio: 5
-    }*/
   }
   
   private positivo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
@@ -64,9 +48,9 @@ export class HistoricoPage {
       this.loup[i] = Number(this.positivo[i].toFixed(2)) - Number(this.negativo[i].toFixed(2))
       this.loup[i] = Number(this.loup[i].toFixed(2))
     }
-    console.log(this.positivo)
+    /*console.log(this.positivo)
     console.log(this.negativo)
-
+    */
     let ctx = document.getElementById("line")
     
     let data = {
@@ -131,28 +115,12 @@ export class HistoricoPage {
     })
   }
 
-  esconde(){
-    console.log(this.grafico)
-    let mostra = !this.grafico
-    console.log(mostra)
-    if (mostra){
-      document.getElementById("numeros").style.display = "none"
-      document.getElementById("grafico").style.display = "block"
-    }else{
-      document.getElementById("numeros").style.display = "block"
-      document.getElementById("grafico").style.display = "none"
-    }
-  }
-
   //função para listar os dados da tabela de historico
-  listarHistorico() {
-
+  listarHistorico(year?) {
     for(let i = 0; i < 12; i++){
       console.log(i)
-      this.historicoSubscription = this.teste.getAllMouth(i).subscribe(data => {
-
+      this.historicoSubscription = this.teste.getAllMouth(i, year).subscribe(data => {
         this.hst = data
-
         if (this.hst.length != 0){
           console.log(this.teste.determinaMes(i))
           for(let j = 0; j < this.hst.length; j++){
@@ -166,10 +134,7 @@ export class HistoricoPage {
         }
       })
     }
-    console.log(this.positivo)
-    console.log(this.negativo)
   }
-
 
   //função para aparecer janela de confirmação
   async showToast(msg) {
@@ -186,53 +151,16 @@ export class HistoricoPage {
     this.nav.pop()
   }
 
-  async apagar(hst: Array<Extrato>) {
-    const alert = await this.alertController.create({
-      header: 'Você realmente deseja apagar o histórico?',
-      message: 'Isso apagará todo o histórico, sem posibilidade de recuperação',
-      buttons: [
-        {
-          text: 'Não',
-          role: 'cancelar',
-          cssClass: 'secondary',
-          handler: () => {
-            console.log('Cancelado');
-          }
-        }, {
-          text: 'Sim',
-          handler: () => {
-            console.log(hst.length)
-            for (let i = 0; i < hst.length; i++) {
-              console.log(hst[i].id)
-              this.deletarHistory(hst[i].id)
-            }
-            this.showToast("Historico deletado com sucesso!!")
-            this.listarHistorico()
-          }
-        }
-      ]
-    });
-    await alert.present();
-  }
+  public anos = [2019,2020,2021,2022,2023,2024,2025,2026,2027,2028,2029,2030]
 
-  async deletarMovimentacao(id) {
-    try {
-      await this.historicoService.deleteHistory(id);
-      //this.pegaTudo()
-      this.showToast("Item deletado com sucesso!!")
-    } catch (erro) {
-      this.showToast(erro)
-    }
-    this.listarHistorico()
-  }
-
-  async deletarHistory(id: string) {
-    try {
-      await this.historicoService.deleteHistory(id);
-      //this.pegaTudo()
-    } catch (erro) {
-      this.showToast(erro)
-    }
-    this.listarHistorico()
+  trocaAno(e){
+    this.positivo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    this.negativo = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    this.loup = [0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0, 0]
+    console.log(e.target.value)
+    this.listarHistorico(e.target.value)
+    setTimeout(() => {
+      this.lineBarsCanvas = this.getChart()
+    }, 500)
   }
 }

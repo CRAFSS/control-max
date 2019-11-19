@@ -54,7 +54,7 @@ export class ModalPage implements OnInit {
     })
   }
 
-  trocaAi(event){
+  trocaMes(event){
     console.log(event.target.value)
     this.pegaTudo(event.target.value)
   }

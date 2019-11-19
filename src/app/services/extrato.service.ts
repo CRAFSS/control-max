@@ -28,14 +28,20 @@ export class ExtratoService {
       })
     )
   }
-  getAllMouth(mesNumero) {
-    let ano = new Date().getFullYear()
+
+  //Função que pega os valores de um determinado ano (year, é opcional), caso não tenha ano, pega o ano corrente do sistema
+  //E devolve a receita, despesas e saldo de todo esse ano
+  getAllMouth(mesNumero, year?) {
+    let ano;
     //let mesNumero = 2
-    
+    if (year){
+      ano = year
+    }else{
+      ano = new Date().getFullYear()
+    }
     this.userId = this.authService.getAuth().currentUser.uid
-    let extColections = this.db.collection<Extrato>(this.userId).doc(`Extrato-${ano}`).collection<Extrato>(this.determinaMes(mesNumero))   
-    //let extColections = this.db.collection<Extrato>(this.userId)   
-       
+    let extColections = this.db.collection<Extrato>(this.userId).doc(`Extrato-${ano}`).collection<Extrato>(this.determinaMes(mesNumero))
+
     return extColections.snapshotChanges().pipe(
       map(action => {
         return action.map(a => {
@@ -74,6 +80,7 @@ export class ExtratoService {
     this.extColections = this.db.collection<Extrato>(this.userId).doc(`Extrato-${ano}`).collection<Extrato>(this.determinaMes(mesNumero))
   }
 
+  //Função que recebe um número e devolve o mês correspondente para seleção no banco de dados
   public determinaMes(mesNumero){
     mesNumero = Number(mesNumero)
     let mes: string;
