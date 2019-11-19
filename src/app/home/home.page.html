@@ -1,7 +1,7 @@
 <ion-header no-border>
   <ion-toolbar>
     <ion-title text-center>
-      Saldo do mês {{mes}}
+      Saldo de {{mes}}
     </ion-title>
   </ion-toolbar>
 </ion-header>
@@ -9,7 +9,7 @@
 <ion-content>
 
   <div (click)="presentModal()" class="iontes">
-    <p class="gasto"><span id="saldo">{{totalString}}</span> Gasto</p>
+    <p class="gasto"><span id="saldo">{{totalString}}</span></p>
     <!--<p class="baixo">R$2.000,00 Disponível</p>-->
   </div>
   <button class="vicon" routerLink="/settings">
