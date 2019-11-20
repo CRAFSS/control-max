@@ -71,4 +71,7 @@ export class CadastroPage implements OnInit {
     return this.loading.present();
   }
 
+  tiraEspaco(email){
+    console.log(typeof(email))
+  }
 }
